@@ -1,0 +1,97 @@
+<template>
+	<aside>
+		<button @click="togglePanel">
+			<img v-if="connected" src="@/assets/remoteconnect.svg" alt="remote icon">
+			<img v-else src="@/assets/remotedisconnect.svg" alt="remote icon">
+		</button>
+        <section v-if="panelOpen" id="activityQueue">
+
+        </section>
+	</aside>
+</template>
+
+<script>
+import sjcl from 'sjcl'
+
+export default {
+	name: 'Status',
+	data() {
+		return {
+			connected: false,
+            panelOpen: false
+		}
+	},
+    computed: {
+        roomID() {
+            return this.$store.state.roomID
+        }
+    },
+    sockets: {
+        roomJoined() {
+            console.log('joined the room:', this.roomID)
+            this.connected = true
+            this.$socket.emit('requestData')
+        },
+        incomingData(data) {
+            let parsedData = JSON.parse(this.decrypt(data))
+
+            this.$store.dispatch('setClassInfo', parsedData.classInfo)
+            this.$store.dispatch('setStudents', parsedData.students)
+            this.$store.dispatch('setRandomStudent', parsedData.randomStudent)
+            this.$store.dispatch('setBehaviors', parsedData.behaviors)
+        },
+        rejoinedRoom() {
+            // notify client that host has reconnected
+            this.connected = true
+        },
+        disconnect() {
+            this.connected = false
+            this.joinRoom()
+        },
+        deviceDisconnection() {
+            console.log('host disconnected')
+
+            this.connected = false
+        }
+    },
+    methods: {
+    	togglePanel() {
+            this.panelOpen = !this.togglePanel
+    	},
+        joinRoom() {
+            this.$socket.emit('joinRoom', this.roomID)
+        },
+        encrypt(data) {
+            return sjcl.encrypt(this.roomID, data)
+        },
+        decrypt(data) {
+            return sjcl.decrypt(this.roomID, data)
+        }
+    },
+    mounted() {
+        let scope = this
+
+        // give time for state mutation to complete
+        setTimeout(function() {
+            scope.joinRoom()
+        }, 2000, scope)
+    }
+}
+</script>
+
+<style scoped>
+#activityQueue {
+    background: var(--yellow);
+}
+
+button {
+	background: none;
+	outline: none;
+	border: none;
+	cursor: pointer;
+}
+
+button > img {
+	height: 30px;
+}
+</style>
