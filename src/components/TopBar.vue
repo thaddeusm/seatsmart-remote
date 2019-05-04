@@ -4,7 +4,7 @@
             <img src="@/assets/logo.svg" id="logo" alt="seatsmart logo">
         </section>
         <section id="center">
-            <h2>{{ name }}</h2>
+            <h3>{{ name }}</h3>
         </section>
         <section id="right">
             <Status />
@@ -27,7 +27,18 @@ export default {
     },
     computed: {
         name() {
-            return this.$store.state.classInfo.name
+            let rawName = this.$store.state.classInfo.name
+
+            if (rawName !== null) {
+                if (rawName.length > 6) {
+                    return rawName.slice(0, 6) + '...'
+                } else {
+                    return rawName
+                }
+            } else {
+                return rawName
+            }
+
         }
     }
 }
@@ -56,7 +67,7 @@ section {
     text-align: center;
 }
 
-h2 {
+h3 {
     color: var(--white);
 }
 

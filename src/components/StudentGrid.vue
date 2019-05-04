@@ -38,8 +38,21 @@ export default {
 			return this.$store.state.classInfo
 		}
 	},
+	watch: {
+		students(newValue, oldValue) {
+			if (newValue.length > 1) {
+				this.buildGrid()
+				this.calculateCardSize()
+
+				// stop loader
+				this.$emit('grid-loaded')
+			}
+		}
+	},
 	methods: {
 		buildGrid() {
+			this.grid = []
+
 			for (let i=0; i<this.classInfo.rows; i++) {
 				this.grid.push([])
 
@@ -109,14 +122,11 @@ export default {
 		}
 	},
 	mounted() {
-		window.addEventListener('resize', this.calculateCardSize)
+		window.addEventListener('resize', () => {
+			this.calculateCardSize()
+		})
 
-		let scope = this
-
-		setTimeout(function() {
-			scope.buildGrid()
-			scope.calculateCardSize()
-		}, 3000, scope)
+		this.buildGrid()
 	}
 }
 </script>

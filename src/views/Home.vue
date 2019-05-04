@@ -1,7 +1,16 @@
 <template>
 	<main>
-		<StudentList id="studentList" />
-		<StudentGrid id="studentGrid" />
+		<Loader id="loader" v-if="!loaded" />
+		<StudentList 
+			v-on:list-loaded="loaded = true" 
+			id="studentList" 
+			:randomStudent="randomStudent"
+		/>
+		<StudentGrid 
+			v-on:grid-loaded="loaded = true" 
+			id="studentGrid" 
+			:randomStudent="randomStudent"
+		/>
 		<ActionButtons>
 			<template slot="left">
 				<button>
@@ -18,6 +27,7 @@
 </template>
 
 <script>
+import Loader from '@/components/Loader.vue'
 import StudentList from '@/components/StudentList.vue'
 import StudentGrid from '@/components/StudentGrid.vue'
 import ActionButtons from '@/components/ActionButtons.vue'
@@ -28,13 +38,27 @@ export default {
 		room: String
 	},
 	components: {
+		Loader,
 		StudentList,
 		StudentGrid,
 		ActionButtons
 	},
 	data() {
 		return {
-			
+			loaded: false,
+			randomStudent: ''
+		}
+	},
+	computed: {
+		students() {
+			return this.$store.state.students
+		}
+	},
+	watch: {
+		students(newValue, oldValue) {
+			if (newValue.length > 1) {
+				this.dataLoaded = true
+			}
 		}
 	},
 	mounted() {
@@ -49,11 +73,19 @@ export default {
 	#studentGrid {
 		display: none;
 	}
+
+	#loader {
+		margin-top: 100px;
+	}
 }
 
 @media screen and (min-width: 601px) {
 	#studentList {
 		display: none;
+	}
+
+	#loader {
+		margin-top: 170px;
 	}
 }
 

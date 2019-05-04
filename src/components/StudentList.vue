@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<div id="searchArea">
+		<div id="searchArea" v-if="loaded">
 			<input v-model="term" type="text" placeholder="search by first name" />
 			<img src="@/assets/search.svg" alt="search icon" id="searchIcon">
 		</div>
@@ -22,7 +22,8 @@ export default {
 	name: 'StudentList',
 	data() {
 		return {
-			term: ''
+			term: '',
+			loaded: false
 		}
 	},
 	computed: {
@@ -30,9 +31,17 @@ export default {
 			return this.$store.state.students
 		},
 		filteredStudents() {
+			let unformattedTerm = this.term.toLowerCase().split(' ').join('')
+
 			return this.students.filter((student) => {
-				return student.firstName.toLowerCase().includes(this.term)
+				return student.firstName.toLowerCase().includes(unformattedTerm)
 			})
+		}
+	},
+	watch: {
+		students(newValue, oldValue) {
+			this.$emit('list-loaded')
+			this.loaded = true
 		}
 	},
 	methods: {

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import simpleId from 'simple-id'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -20,7 +22,11 @@ export default new Vuex.Store({
         behaviors: {
             positive: [],
             negative: []
-        }
+        },
+        actionQueue: [{
+            id: null,
+            action: null
+        }]
     },
     mutations: {
     	setRoomID(state, roomID) {
@@ -37,6 +43,22 @@ export default new Vuex.Store({
         },
         setBehaviors(state, behaviors) {
             state.behaviors = behaviors
+        },
+        pushToActionQueue(state, action) {
+            let newId = simpleId()
+
+            state.actionQueue.push({
+                id: newId,
+                action: action
+            })
+        },
+        removeFromActionQueue(state, actionId) {
+            for (let i=0; i<state.actionQueue.length; i++) {
+                if (state.actionQueue[i].id == actionId) {
+                    state.actionQueue.splice(i, 1)
+                    break;
+                }
+            }
         }
     },
     actions: {
@@ -54,6 +76,12 @@ export default new Vuex.Store({
         },
         setBehaviors(context, behaviors) {
             context.commit('setBehaviors', behaviors)
+        },
+        pushToActionQueue(context, action) {
+            context.commit('pushToActionQueue', action)
+        },
+        removeFromActionQueue(context, actionId) {
+            context.commit('removeFromActionQueue', actionId)
         }
     }
 })

@@ -4,7 +4,7 @@
 			<img v-if="connected" src="@/assets/remoteconnect.svg" alt="remote icon">
 			<img v-else src="@/assets/remotedisconnect.svg" alt="remote icon">
 		</button>
-        <section v-if="panelOpen" id="activityQueue">
+        <section v-if="panelOpen" id="actionQueue">
 
         </section>
 	</aside>
@@ -24,6 +24,9 @@ export default {
     computed: {
         roomID() {
             return this.$store.state.roomID
+        },
+        actionQueue() {
+            return this.$store.state.actionQueue
         }
     },
     sockets: {
@@ -43,6 +46,9 @@ export default {
         rejoinedRoom() {
             // notify client that host has reconnected
             this.connected = true
+
+            // request fresh data on rejoin
+            this.$socket.emit('requestData')
         },
         disconnect() {
             this.connected = false
@@ -52,6 +58,9 @@ export default {
             console.log('host disconnected')
 
             this.connected = false
+        },
+        sessionEnded() {
+            this.$router.push('/exit')
         }
     },
     methods: {
@@ -80,7 +89,7 @@ export default {
 </script>
 
 <style scoped>
-#activityQueue {
+#actionQueue {
     background: var(--yellow);
 }
 
