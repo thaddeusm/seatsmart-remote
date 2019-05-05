@@ -54,13 +54,6 @@ export default {
 			return this.$store.state.students
 		}
 	},
-	watch: {
-		students(newValue, oldValue) {
-			if (newValue.length > 1) {
-				this.dataLoaded = true
-			}
-		}
-	},
 	mounted() {
 		this.$store.dispatch('setRoomID', this.room)
 	}

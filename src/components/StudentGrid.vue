@@ -2,7 +2,7 @@
 	<section>
 		<div class="row" v-for="(row, index) in grid" :style="rowMargins" :key="`row${index}`">
             <div v-for="(student, subIndex) in row" class="card-wrapper">
-                <button v-if="student._id !== 'blank'" :style="cardStyle">
+                <button v-if="student._id !== 'blank'" :class="[student.absent ? 'absent' : '']" :style="cardStyle">
                 	{{ student.firstName }} {{ student.lastName[0]}}.
                 </button>
                 <button class="blank-card" :style="cardStyle" v-else disabled></button>
@@ -32,13 +32,28 @@ export default {
 	},
 	computed: {
 		students() {
-			return this.$store.state.students
+			// add absent property to student list for UI
+			let allStudents = this.$store.state.students
+			
+			for (let i=0; i<this.absentStudents.length; i++) {
+				for (let k=0; k<allStudents.length; k++) {
+					if (this.absentStudents[i] == allStudents[k]._id) {
+						allStudents[k]['absent'] = true
+					}
+				}
+			}
+
+			return allStudents
+		},
+		absentStudents() {
+			return this.$store.state.absentStudents
 		},
 		classInfo() {
 			return this.$store.state.classInfo
 		}
 	},
 	watch: {
+		// wait to load UI until store updates
 		students(newValue, oldValue) {
 			if (newValue.length > 1) {
 				this.buildGrid()
@@ -122,6 +137,7 @@ export default {
 		}
 	},
 	mounted() {
+		// check for screen size changes (device rotation)
 		window.addEventListener('resize', () => {
 			this.calculateCardSize()
 		})
@@ -143,6 +159,10 @@ section {
 
 .card-wrapper {
     display: inline-block;
+}
+
+.absent {
+	opacity: .7;
 }
 
 .blank-card {

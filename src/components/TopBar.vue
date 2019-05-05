@@ -27,6 +27,7 @@ export default {
     },
     computed: {
         name() {
+            // shorten long class names
             let rawName = this.$store.state.classInfo.name
 
             if (rawName !== null) {

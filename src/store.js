@@ -18,6 +18,7 @@ export default new Vuex.Store({
             archived: null
         },
         students: [],
+        absentStudents: [],
         randomStudent: 0,
         behaviors: {
             positive: [],
@@ -37,6 +38,9 @@ export default new Vuex.Store({
         },
         setStudents(state, students) {
             state.students = students
+        },
+        setAbsentStudents(state, absentStudents) {
+            state.absentStudents = absentStudents
         },
         setRandomStudent(state, randomStudent) {
             state.randomStudent = randomStudent
@@ -70,6 +74,9 @@ export default new Vuex.Store({
         },
         setStudents(context, students) {
             context.commit('setStudents', students)
+        },
+        setAbsentStudents(context, absentStudents) {
+            context.commit('setAbsentStudents', absentStudents)
         },
         setRandomStudent(context, randomStudent) {
             context.commit('setRandomStudent', randomStudent)

@@ -5,7 +5,7 @@
 			<img v-else src="@/assets/remotedisconnect.svg" alt="remote icon">
 		</button>
         <section v-if="panelOpen" id="actionQueue">
-
+            <!-- todo -->
         </section>
 	</aside>
 </template>
@@ -36,10 +36,12 @@ export default {
             this.$socket.emit('requestData')
         },
         incomingData(data) {
+            // parse and dispatch data to store
             let parsedData = JSON.parse(this.decrypt(data))
 
             this.$store.dispatch('setClassInfo', parsedData.classInfo)
             this.$store.dispatch('setStudents', parsedData.students)
+            this.$store.dispatch('setAbsentStudents', parsedData.absentStudents)
             this.$store.dispatch('setRandomStudent', parsedData.randomStudent)
             this.$store.dispatch('setBehaviors', parsedData.behaviors)
         },
@@ -51,15 +53,20 @@ export default {
             this.$socket.emit('requestData')
         },
         disconnect() {
+            // update UI on disconnection
             this.connected = false
+
+            // attempt to rejoin room
             this.joinRoom()
         },
         deviceDisconnection() {
+            // detect host disconnection
             console.log('host disconnected')
 
             this.connected = false
         },
         sessionEnded() {
+            // kick out client when host leaves / cancels connection
             this.$router.push('/exit')
         }
     },
