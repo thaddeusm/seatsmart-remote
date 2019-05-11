@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Note from './views/Note.vue'
 import Exit from './views/Exit.vue'
 
 Vue.use(Router)
@@ -16,6 +17,12 @@ export default new Router({
       props: (route) => ({
           room: route.query.room,
       })
+    },
+    {
+      path: '/note/:student',
+      name: 'note',
+      component: Note,
+      props: true
     },
     {
       path: '/exit',

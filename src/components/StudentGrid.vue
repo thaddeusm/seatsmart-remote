@@ -2,8 +2,14 @@
 	<section>
 		<div class="row" v-for="(row, index) in grid" :style="rowMargins" :key="`row${index}`">
             <div v-for="(student, subIndex) in row" class="card-wrapper">
-                <button v-if="student._id !== 'blank'" :class="[student.absent ? 'absent' : '']" :style="cardStyle">
-                	{{ student.firstName }} {{ student.lastName[0]}}.
+                <button 
+                	v-if="student._id !== 'blank'" 
+                	:class="[student.absent ? 'absent' : '']" 
+                	:style="cardStyle"
+                	@click="selectStudent(student)"
+                	:ref="student._id"
+                >
+                		{{ student.firstName }} {{ student.lastName[0]}}.
                 </button>
                 <button class="blank-card" :style="cardStyle" v-else disabled></button>
             </div>
@@ -93,6 +99,11 @@ export default {
 
 	            this.grid[thisRow - 1][thisColumn - 1] = thisStudent
 	        }
+
+	        // disable loader if students available to list
+			if (this.students.length > 1) {
+				this.$emit('grid-loaded')
+			}
 		},
 		calculateCardSize() {
 			// determine ideal card dimensions
@@ -134,6 +145,17 @@ export default {
 			this.cardStyle.height = `${totalCardHeight * .7}px`
 			this.rowMargins.marginTop = `${verticalMargin}px`
 			this.rowMargins.marginBottom = `${verticalMargin}px`
+		},
+		selectStudent(student) {
+			this.$emit('student-selected', student)
+
+			if (this.$refs[student._id][0].classList.contains('selected')) {
+				this.$refs[student._id][0].classList.remove('selected')
+			} else {
+				this.$refs[student._id][0].classList.add('selected')
+			}
+
+			console.log(student)
 		}
 	},
 	mounted() {
@@ -142,7 +164,13 @@ export default {
 			this.calculateCardSize()
 		})
 
+		this.calculateCardSize()
 		this.buildGrid()
+
+		// disable loader if students available to list
+		if (this.students.length > 1) {
+
+		}
 	}
 }
 </script>
@@ -165,12 +193,15 @@ section {
 	opacity: .7;
 }
 
+.selected {
+	background: var(--yellow);
+}
+
 .blank-card {
 	background: var(--gray);
 	color: var(--black);
 	border-radius: 10px;
 	outline: none;
-	border: 6px solid var(--gray);
 	cursor: not-allowed;
 	display: inline-block;
 	text-decoration: none;
@@ -182,7 +213,6 @@ button {
 	color: var(--black);
 	border-radius: 10px;
 	outline: none;
-	border: 6px solid var(--light-gray);
 	cursor: pointer;
 	display: inline-grid;
 	text-decoration: none;

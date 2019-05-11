@@ -30,7 +30,6 @@ aside {
 	width: 100%;
 	max-width: 200px;
 	font-size: 26px;
-	background: var(--yellow);
 	outline: none;
 	border: none;
 	cursor: pointer;

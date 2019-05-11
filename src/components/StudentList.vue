@@ -5,14 +5,14 @@
 			<img v-if="term == ''" src="@/assets/search.svg" alt="search icon" id="searchIcon">
 			<button v-else @click="clearSearchBox" id="clearSearchBoxButton"><img src="@/assets/close.svg" alt="close icon"></button>
 		</div>
-		<ul v-if="term == ''">
+		<ul>
 			<li v-for="(student, index) in students">
-				<button :class="[student.absent ? 'absent' : '', 'student-button']" @click="selectStudent(index)">{{ student.firstName }} {{ student.lastName }}</button>
-			</li>
-		</ul>
-		<ul v-else>
-			<li v-for="(student, index) in filteredStudents">
-				<button :class="[student.absent ? 'absent' : '', 'student-button']" @click="selectStudent(index)">{{ student.firstName }} {{ student.lastName }}</button>
+				<button 
+					:class="[student.absent ? 'absent' : '', student.selected ? 'selected' : '', 'student-button']" 
+					@click="selectStudent(student)"
+				>
+					{{ student.firstName }} {{ student.lastName }}
+				</button>
 			</li>
 		</ul>
 	</section>
@@ -24,51 +24,88 @@ export default {
 	data() {
 		return {
 			term: '',
-			loaded: false
+			loaded: false,
+			students: []
 		}
 	},
+	props: {
+		selectedStudents: Array
+	},
 	computed: {
-		students() {
-			// add absent property to student list for UI
-			let allStudents = this.$store.state.students
-			
-			for (let i=0; i<this.absentStudents.length; i++) {
-				for (let k=0; k<allStudents.length; k++) {
-					if (this.absentStudents[i] == allStudents[k]._id) {
-						allStudents[k]['absent'] = true
-					}
-				}
-			}
-
-			return allStudents
+		allStudents() {
+			return this.$store.state.students	
 		},
 		absentStudents() {
 			return this.$store.state.absentStudents
-		},
-		filteredStudents() {
-			let unformattedTerm = this.term.toLowerCase().split(' ').join('')
-
-			return this.students.filter((student) => {
-				return student.firstName.toLowerCase().includes(unformattedTerm)
-			})
 		}
 	},
 	watch: {
 		// load UI after store updates
-		students(newValue, oldValue) {
-			this.$emit('list-loaded')
-			this.loaded = true
+		allStudents(newValue, oldValue) {
+			if (newValue.length > 0) {
+				this.$emit('list-loaded')
+				this.loaded = true
+				this.filterStudents()
+			}
+		},
+		term(newValue, oldValue) {
+			this.filterStudents()
 		}
 	},
 	methods: {
-		selectStudent(studentIndex) {
-			// todo: load note view with individual student preselected
-
-			console.log(studentIndex)
+		selectStudent(student) {
+			this.$emit('student-selected', student)
+			
+			for (let i=0; i<this.students.length; i++) {
+				if (student._id == this.students[i]._id) {
+					if (this.students[i]['selected']) {
+						this.students[i]['selected'] = false
+					} else {
+						this.students[i]['selected'] = true
+					}
+				}
+			}
+		},
+		deselectAllStudents() {
+			for (let i=0; i<this.students.length; i++) {
+				this.students[i]['selected'] = false
+			}
+		},
+		addAbsences() {
+			for (let i=0; i<this.absentStudents.length; i++) {
+				for (let k=0; k<this.students.length; k++) {
+					if (this.absentStudents[i] == this.students[k]._id) {
+						this.students[k]['absent'] = true
+					}
+				}
+			}
 		},
 		clearSearchBox() {
 			this.term = ''
 			this.$refs.listContainer.focus()
+		},
+		filterStudents() {
+			this.students = this.allStudents
+
+			this.addAbsences()
+
+			if (this.term !== '') {
+				let unformattedTerm = this.term.toLowerCase().split(' ').join('')
+
+				let filteredList = this.students.filter((student) => {
+					return student.firstName.toLowerCase().includes(unformattedTerm)
+				})
+
+				this.students = filteredList
+			}
+		}
+	},
+	mounted() {
+		if (this.allStudents.length > 0) {
+			this.$emit('list-loaded')
+			this.loaded = true
+			this.filterStudents()
+			this.deselectAllStudents()
 		}
 	}
 }
@@ -98,6 +135,10 @@ li {
 
 .absent {
 	opacity: .7;
+}
+
+.selected {
+	background: var(--yellow);
 }
 
 #searchArea {

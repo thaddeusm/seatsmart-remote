@@ -13,12 +13,12 @@
 		/>
 		<ActionButtons>
 			<template slot="left">
-				<button>
+				<button class="action-button" @click="$router.push('/note/none')">
 					<img src="@/assets/note.svg" alt="note icon">
 				</button>
 			</template>
 			<template slot="right">
-				<button>
+				<button class="action-button">
 					<img src="@/assets/random.svg" alt="dice icon">
 				</button>
 			</template>
@@ -82,8 +82,7 @@ export default {
 	}
 }
 
-
-h1 {
-	color: var(--yellow);
+.action-button {
+	background: var(--yellow);
 }
 </style>

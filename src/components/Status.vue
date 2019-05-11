@@ -75,7 +75,9 @@ export default {
             this.panelOpen = !this.togglePanel
     	},
         joinRoom() {
-            this.$socket.emit('joinRoom', this.roomID)
+            if (this.roomID !== undefined) {
+                this.$socket.emit('joinRoom', this.roomID)
+            }
         },
         encrypt(data) {
             return sjcl.encrypt(this.roomID, data)
