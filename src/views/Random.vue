@@ -37,7 +37,11 @@ export default {
 			return this.$store.state.randomStudent
 		},
 		student() {
-			return this.students[this.randomStudent - 1]
+			if (this.randomStudent == 0) {
+				return this.students[this.randomStudent]
+			} else {
+				return this.students[this.randomStudent - 1]
+			}
 		},
 		room() {
 			return this.$store.state.roomID
@@ -89,6 +93,7 @@ export default {
 	},
 	mounted() {
 		this.sendRandomToHost()
+		
 	}
 }
 </script>
