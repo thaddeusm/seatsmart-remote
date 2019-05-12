@@ -114,7 +114,7 @@ header {
 
 h1 {
 	color: var(--white);
-	margin: 100px 0;
+	margin: 70px 0;
 	font-size: 3em;
 	text-align: center;
 }
