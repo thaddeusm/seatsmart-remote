@@ -8,8 +8,8 @@
 		<ul>
 			<li v-for="(student, index) in students">
 				<button 
-					:class="[student.absent ? 'absent' : '', student.selected ? 'selected' : '', 'student-button']" 
-					@click="selectStudent(student)"
+					:class="[student.absent ? 'absent' : '', student.chosen ? 'chosen' : '', 'student-button']" 
+					@click="chooseStudent(student)"
 				>
 					{{ student.firstName }} {{ student.lastName }}
 				</button>
@@ -29,7 +29,7 @@ export default {
 		}
 	},
 	props: {
-		selectedStudents: Array
+		chosenStudents: Array
 	},
 	computed: {
 		allStudents() {
@@ -53,22 +53,25 @@ export default {
 		}
 	},
 	methods: {
-		selectStudent(student) {
-			this.$emit('student-selected', student)
+		chooseStudent(student) {
+			this.$emit('student-chosen', student)
 			
+			this.toggleHighlight(student)
+		},
+		toggleHighlight(student) {
 			for (let i=0; i<this.students.length; i++) {
 				if (student._id == this.students[i]._id) {
-					if (this.students[i]['selected']) {
-						this.students[i]['selected'] = false
+					if (this.students[i]['chosen']) {
+						this.students[i]['chosen'] = false
 					} else {
-						this.students[i]['selected'] = true
+						this.students[i]['chosen'] = true
 					}
 				}
 			}
 		},
 		deselectAllStudents() {
 			for (let i=0; i<this.students.length; i++) {
-				this.students[i]['selected'] = false
+				this.students[i]['chosen'] = false
 			}
 		},
 		addAbsences() {
@@ -106,6 +109,13 @@ export default {
 			this.loaded = true
 			this.filterStudents()
 			this.deselectAllStudents()
+
+			if (this.chosenStudents !== undefined) {
+				for (let i=0; i<this.chosenStudents.length; i++) {
+					this.toggleHighlight(this.chosenStudents[i])
+				}
+			}
+			
 		}
 	}
 }
@@ -137,7 +147,7 @@ li {
 	opacity: .7;
 }
 
-.selected {
+.chosen {
 	background: var(--yellow);
 }
 

@@ -4,9 +4,9 @@
             <div v-for="(student, subIndex) in row" class="card-wrapper">
                 <button 
                 	v-if="student._id !== 'blank'" 
-                	:class="[student.absent ? 'absent' : '']" 
+                	:class="[student.absent ? 'absent' : '', student.chosen ? 'chosen' : '']" 
                 	:style="cardStyle"
-                	@click="selectStudent(student)"
+                	@click="chooseStudent(student)"
                 	:ref="student._id"
                 >
                 		{{ student.firstName }} {{ student.lastName[0]}}.
@@ -20,6 +20,9 @@
 <script>
 export default {
 	name: 'StudentGrid',
+	props: {
+		chosenStudents: Array
+	},
 	data() {
 		return {
 			grid: [],
@@ -146,16 +149,27 @@ export default {
 			this.rowMargins.marginTop = `${verticalMargin}px`
 			this.rowMargins.marginBottom = `${verticalMargin}px`
 		},
-		selectStudent(student) {
-			this.$emit('student-selected', student)
+		chooseStudent(student) {
+			this.$emit('student-chosen', student)
 
-			if (this.$refs[student._id][0].classList.contains('selected')) {
-				this.$refs[student._id][0].classList.remove('selected')
-			} else {
-				this.$refs[student._id][0].classList.add('selected')
-			}
+			this.toggleHighlight(student)
 
 			console.log(student)
+		},
+		toggleHighlight(student) {
+			for (let i=0; i<this.grid.length; i++) {
+				for (let k=0; k<this.grid[i].length; k++) {
+					if (student._id == this.grid[i][k]._id) {
+						if (this.grid[i][k]['chosen']) {
+							this.grid[i][k]['chosen'] = false
+							this.$refs[student._id][0].classList.remove('chosen')
+						} else {
+							this.grid[i][k]['chosen'] = true
+							this.$refs[student._id][0].classList.add('chosen')
+						}
+					}
+				}
+			}
 		}
 	},
 	mounted() {
@@ -167,9 +181,10 @@ export default {
 		this.calculateCardSize()
 		this.buildGrid()
 
-		// disable loader if students available to list
-		if (this.students.length > 1) {
-
+		if (this.selectedStudents !== undefined) {
+			for (let i=0; i<this.selectedStudents.length; i++) {
+				this.toggleHighlight(this.selectedStudents[i])
+			}
 		}
 	}
 }
@@ -193,7 +208,7 @@ section {
 	opacity: .7;
 }
 
-.selected {
+.chosen {
 	background: var(--yellow);
 }
 

@@ -24,10 +24,7 @@ export default new Vuex.Store({
             positive: [],
             negative: []
         },
-        actionQueue: [{
-            id: null,
-            action: null
-        }]
+        actionQueue: []
     },
     mutations: {
     	setRoomID(state, roomID) {

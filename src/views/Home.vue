@@ -5,11 +5,13 @@
 			v-on:list-loaded="loaded = true" 
 			id="studentList" 
 			:randomStudent="randomStudent"
+			v-on:student-chosen="routeToNote"
 		/>
 		<StudentGrid 
 			v-on:grid-loaded="loaded = true" 
 			id="studentGrid" 
 			:randomStudent="randomStudent"
+			v-on:student-chosen="routeToNote"
 		/>
 		<ActionButtons>
 			<template slot="left">
@@ -52,6 +54,11 @@ export default {
 	computed: {
 		students() {
 			return this.$store.state.students
+		}
+	},
+	methods: {
+		routeToNote(student) {
+			this.$router.push(`/note/${student._id}`)
 		}
 	},
 	mounted() {

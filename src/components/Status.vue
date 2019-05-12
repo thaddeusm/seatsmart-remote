@@ -29,6 +29,15 @@ export default {
             return this.$store.state.actionQueue
         }
     },
+    watch: {
+        actionQueue(newValue, oldValue) {
+            if (newValue.length !== 0) {
+                for (let i=0; i<newValue.length; i++) {
+                    this.$socket.emit('initAction', this.encrypt(newValue[i]))
+                }
+            }
+        }
+    },
     sockets: {
         roomJoined() {
             console.log('joined the room:', this.roomID)
@@ -37,7 +46,7 @@ export default {
         },
         incomingData(data) {
             // parse and dispatch data to store
-            let parsedData = JSON.parse(this.decrypt(data))
+            let parsedData = this.decrypt(data)
 
             this.$store.dispatch('setClassInfo', parsedData.classInfo)
             this.$store.dispatch('setStudents', parsedData.students)
@@ -68,6 +77,9 @@ export default {
         sessionEnded() {
             // kick out client when host leaves / cancels connection
             this.$router.push('/exit')
+        },
+        confirmAction(id) {
+            this.$store.dispatch('removeFromActionQueue', this.decrypt(id))
         }
     },
     methods: {
@@ -80,10 +92,12 @@ export default {
             }
         },
         encrypt(data) {
-            return sjcl.encrypt(this.roomID, data)
+            return sjcl.encrypt(this.roomID, JSON.stringify(data))
         },
         decrypt(data) {
-            return sjcl.decrypt(this.roomID, data)
+            let decrypted = sjcl.decrypt(this.roomID, data)
+
+            return JSON.parse(decrypted)
         }
     },
     mounted() {

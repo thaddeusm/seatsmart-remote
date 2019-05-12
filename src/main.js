@@ -13,6 +13,10 @@ Vue.use(new VueSocketIO({
     connection: SocketIO('https://seatsmart-remote-server.now.sh')
 }))
 
+import vCascade from 'v-cascade'
+
+Vue.use(vCascade)
+
 new Vue({
   router,
   store,
