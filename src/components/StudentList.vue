@@ -3,10 +3,10 @@
 		<div id="searchArea" v-if="loaded">
 			<input v-model="term" type="text" placeholder="search by first name" />
 			<img v-if="term == ''" src="@/assets/search.svg" alt="search icon" id="searchIcon">
-			<button v-else @click="clearSearchBox" id="clearSearchBoxButton"><img src="@/assets/close.svg" alt="close icon"></button>
+			<button v-else @click="clearSearchBox" id="clearSearchBoxButton"><img src="@/assets/closered.svg" alt="close icon"></button>
 		</div>
 		<ul>
-			<li v-for="(student, index) in students">
+			<li v-for="(student, index) in students" :key="`student${index}`">
 				<button 
 					:class="[student.absent ? 'absent' : '', student.chosen ? 'chosen' : '', 'student-button']" 
 					@click="chooseStudent(student)"
@@ -24,8 +24,7 @@ export default {
 	data() {
 		return {
 			term: '',
-			loaded: false,
-			students: []
+			loaded: false
 		}
 	},
 	props: {
@@ -37,7 +36,35 @@ export default {
 		},
 		absentStudents() {
 			return this.$store.state.absentStudents
-		}
+		},
+		students() {
+			// add absent property to student list for UI
+			let allStudents = this.$store.state.students
+			
+			for (let i=0; i<this.absentStudents.length; i++) {
+				for (let k=0; k<allStudents.length; k++) {
+					if (this.absentStudents[i] == allStudents[k]._id) {
+						allStudents[k]['absent'] = true
+					}
+
+					if (this.chosenStudents == undefined) {
+						allStudents[k]['chosen'] = false
+					}
+				}
+			}
+
+			if (this.term !== '') {
+				let unformattedTerm = this.term.toLowerCase().split(' ').join('')
+
+				let filteredList = allStudents.filter((student) => {
+					return student.firstName.toLowerCase().includes(unformattedTerm)
+				})
+
+				return filteredList
+			} else {
+				return allStudents
+			}
+		},
 	},
 	watch: {
 		// load UI after store updates
@@ -61,17 +88,12 @@ export default {
 		toggleHighlight(student) {
 			for (let i=0; i<this.students.length; i++) {
 				if (student._id == this.students[i]._id) {
-					if (this.students[i]['chosen']) {
+					if (this.students[i]['chosen'] == true) {
 						this.students[i]['chosen'] = false
 					} else {
 						this.students[i]['chosen'] = true
 					}
 				}
-			}
-		},
-		deselectAllStudents() {
-			for (let i=0; i<this.students.length; i++) {
-				this.students[i]['chosen'] = false
 			}
 		},
 		addAbsences() {
@@ -88,34 +110,14 @@ export default {
 			this.$refs.listContainer.focus()
 		},
 		filterStudents() {
-			this.students = this.allStudents
-
-			this.addAbsences()
-
-			if (this.term !== '') {
-				let unformattedTerm = this.term.toLowerCase().split(' ').join('')
-
-				let filteredList = this.students.filter((student) => {
-					return student.firstName.toLowerCase().includes(unformattedTerm)
-				})
-
-				this.students = filteredList
-			}
+			
 		}
 	},
 	mounted() {
 		if (this.allStudents.length > 0) {
 			this.$emit('list-loaded')
 			this.loaded = true
-			this.filterStudents()
-			this.deselectAllStudents()
-
-			if (this.chosenStudents !== undefined) {
-				for (let i=0; i<this.chosenStudents.length; i++) {
-					this.toggleHighlight(this.chosenStudents[i])
-				}
-			}
-			
+			// this.filterStudents()
 		}
 	}
 }

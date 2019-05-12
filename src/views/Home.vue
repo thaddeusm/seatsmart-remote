@@ -20,7 +20,7 @@
 				</button>
 			</template>
 			<template slot="right">
-				<button class="action-button">
+				<button class="action-button" @click="$router.push('/random')">
 					<img src="@/assets/random.svg" alt="dice icon">
 				</button>
 			</template>

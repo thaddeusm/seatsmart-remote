@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Note from './views/Note.vue'
+import Random from './views/Random.vue'
 import Exit from './views/Exit.vue'
 
 Vue.use(Router)
@@ -23,6 +24,11 @@ export default new Router({
       name: 'note',
       component: Note,
       props: true
+    },
+    {
+      path: '/random',
+      name: 'random',
+      component: Random
     },
     {
       path: '/exit',

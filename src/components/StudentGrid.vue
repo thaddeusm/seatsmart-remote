@@ -1,13 +1,12 @@
 <template>
 	<section>
-		<div class="row" v-for="(row, index) in grid" :style="rowMargins" :key="`row${index}`">
+		<div class="row" v-for="(row, index) in grid" :style="rowMargins" :key="`${index}`">
             <div v-for="(student, subIndex) in row" class="card-wrapper">
                 <button 
                 	v-if="student._id !== 'blank'" 
                 	:class="[student.absent ? 'absent' : '', student.chosen ? 'chosen' : '']" 
                 	:style="cardStyle"
                 	@click="chooseStudent(student)"
-                	:ref="student._id"
                 >
                 		{{ student.firstName }} {{ student.lastName[0]}}.
                 </button>
@@ -48,6 +47,10 @@ export default {
 				for (let k=0; k<allStudents.length; k++) {
 					if (this.absentStudents[i] == allStudents[k]._id) {
 						allStudents[k]['absent'] = true
+					}
+
+					if (this.chosenStudents == undefined) {
+						allStudents[k]['chosen'] = false
 					}
 				}
 			}
@@ -160,12 +163,10 @@ export default {
 			for (let i=0; i<this.grid.length; i++) {
 				for (let k=0; k<this.grid[i].length; k++) {
 					if (student._id == this.grid[i][k]._id) {
-						if (this.grid[i][k]['chosen']) {
+						if (this.grid[i][k]['chosen'] == true) {
 							this.grid[i][k]['chosen'] = false
-							this.$refs[student._id][0].classList.remove('chosen')
 						} else {
 							this.grid[i][k]['chosen'] = true
-							this.$refs[student._id][0].classList.add('chosen')
 						}
 					}
 				}
@@ -180,12 +181,6 @@ export default {
 
 		this.calculateCardSize()
 		this.buildGrid()
-
-		if (this.selectedStudents !== undefined) {
-			for (let i=0; i<this.selectedStudents.length; i++) {
-				this.toggleHighlight(this.selectedStudents[i])
-			}
-		}
 	}
 }
 </script>

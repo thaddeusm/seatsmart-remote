@@ -42,6 +42,9 @@ export default new Vuex.Store({
         setRandomStudent(state, randomStudent) {
             state.randomStudent = randomStudent
         },
+        incrementRandomStudent(state) {
+            state.randomStudent++
+        },
         setBehaviors(state, behaviors) {
             state.behaviors = behaviors
         },
@@ -77,6 +80,9 @@ export default new Vuex.Store({
         },
         setRandomStudent(context, randomStudent) {
             context.commit('setRandomStudent', randomStudent)
+        },
+        incrementRandomStudent(context) {
+            context.commit('incrementRandomStudent')
         },
         setBehaviors(context, behaviors) {
             context.commit('setBehaviors', behaviors)

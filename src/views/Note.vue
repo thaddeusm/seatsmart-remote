@@ -20,7 +20,7 @@
 			<ActionButtons>
 				<template slot="left">
 					<button class="action-button" @click="routeBack">
-						<img src="@/assets/close.svg" alt="close icon">
+						<img src="@/assets/closeblack.svg" alt="close icon">
 					</button>
 				</template>
 				<template slot="right">
@@ -51,13 +51,13 @@
 				<h6 :class="[chosenBehavior.Type]">
 					{{ chosenBehavior.Description }}
 				</h6>
-				<button class="cancel-button" @click="resetBehavior"><img src="@/assets/close.svg" alt="close icon"></button>
-				<textarea v-model="note"></textarea>
+				<button class="cancel-button" @click="resetBehavior"><img src="@/assets/closered.svg" alt="close icon"></button>
+				<textarea v-model="note" placeholder="Your note (optional)..."></textarea>
 			</section>
 			<ActionButtons>
 				<template slot="left">
 					<button class="action-button" @click="routeBack">
-						<img src="@/assets/close.svg" alt="close icon">
+						<img src="@/assets/closeblack.svg" alt="close icon">
 					</button>
 				</template>
 				<template slot="right">
@@ -257,6 +257,8 @@ textarea {
 	height: 140px;
 	padding: 15px;
 	font-size: 19px;
+	border: 1px solid var(--gray);
+	outline: none;
 }
 
 #noteIcon {
