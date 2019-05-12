@@ -20,7 +20,7 @@
 				</button>
 			</template>
 			<template slot="right">
-				<button class="action-button" @click="$router.push('/random')">
+				<button class="action-button" @click="$router.push('/random')" :disabled="absentStudents.length == students.length || students.length - absentStudents.length < 2">
 					<img src="@/assets/random.svg" alt="dice icon">
 				</button>
 			</template>
@@ -54,6 +54,9 @@ export default {
 	computed: {
 		students() {
 			return this.$store.state.students
+		},
+		absentStudents() {
+			return this.$store.state.absentStudents
 		}
 	},
 	methods: {
@@ -91,5 +94,10 @@ export default {
 
 .action-button {
 	background: var(--yellow);
+}
+
+.action-button:disabled {
+	cursor: not-allowed;
+	opacity: .5;
 }
 </style>

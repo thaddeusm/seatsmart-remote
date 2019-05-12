@@ -16,7 +16,7 @@
 				</button>
 			</template>
 			<template slot="right">
-				<button class="action-button" @click="incrementRandomStudent">
+				<button class="action-button" @click="incrementRandomStudent" :disabled="absentStudents.length == students.length || students.length - absentStudents.length < 2">
 					<img src="@/assets/random.svg" alt="dice icon">
 				</button>
 			</template>
@@ -37,12 +37,16 @@ export default {
 			return this.$store.state.randomStudent
 		},
 		student() {
-			let allStudents = this.$store.state.students
-
-			return allStudents[this.randomStudent - 1]
+			return this.students[this.randomStudent - 1]
 		},
 		room() {
 			return this.$store.state.roomID
+		},
+		students() {
+			return this.$store.state.students
+		},
+		absentStudents() {
+			return this.$store.state.absentStudents
 		}
 	},
 	methods: {
@@ -121,5 +125,10 @@ h1 {
 
 .action-button {
 	background: var(--yellow);
+}
+
+.action-button:disabled {
+	cursor: not-allowed;
+	opacity: .5;
 }
 </style>
