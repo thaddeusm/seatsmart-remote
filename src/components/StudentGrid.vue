@@ -1,12 +1,13 @@
 <template>
 	<section>
-		<div class="row" v-for="(row, index) in grid" :style="rowMargins" :key="`${index}`">
-            <div v-for="(student, subIndex) in row" class="card-wrapper">
+		<div class="row" v-for="(row, index) in grid" :style="rowMargins">
+            <div v-for="(student, subIndex) in row" :class="[student.chosen ? 'chosen' : '' ,'card-wrapper']" :key="subIndex">
                 <button 
                 	v-if="student._id !== 'blank'" 
-                	:class="[student.absent ? 'absent' : '', student.chosen ? 'chosen' : '']" 
                 	:style="cardStyle"
-                	@click="chooseStudent(student)"
+                	:class="[student.absent ? 'absent' : '']" 
+                	@click="chooseStudent(student, index, subIndex)"
+                	:key="student._id + ' ' + numChosen"
                 >
                 		{{ student.firstName }} {{ student.lastName[0]}}.
                 </button>
@@ -35,7 +36,8 @@ export default {
 			rowMargins: {
 				marginTop: '',
 				marginBottom: ''
-			}
+			},
+			numChosen: 0
 		}
 	},
 	computed: {
@@ -47,10 +49,6 @@ export default {
 				for (let k=0; k<allStudents.length; k++) {
 					if (this.absentStudents[i] == allStudents[k]._id) {
 						allStudents[k]['absent'] = true
-					}
-
-					if (this.chosenStudents == undefined) {
-						allStudents[k]['chosen'] = false
 					}
 				}
 			}
@@ -103,6 +101,10 @@ export default {
 	            let thisRow = thisStudent.seat.row
 	            let thisColumn = thisStudent.seat.column
 
+	            if (this.chosenStudents == undefined) {
+	            	thisStudent.chosen = false
+	            }
+
 	            this.grid[thisRow - 1][thisColumn - 1] = thisStudent
 	        }
 
@@ -152,24 +154,16 @@ export default {
 			this.rowMargins.marginTop = `${verticalMargin}px`
 			this.rowMargins.marginBottom = `${verticalMargin}px`
 		},
-		chooseStudent(student) {
+		chooseStudent(student, row, column) {
+			this.numChosen++
+			this.toggleHighlight(student, row, column)
 			this.$emit('student-chosen', student)
-
-			this.toggleHighlight(student)
-
-			console.log(student)
 		},
-		toggleHighlight(student) {
-			for (let i=0; i<this.grid.length; i++) {
-				for (let k=0; k<this.grid[i].length; k++) {
-					if (student._id == this.grid[i][k]._id) {
-						if (this.grid[i][k]['chosen'] == true) {
-							this.grid[i][k]['chosen'] = false
-						} else {
-							this.grid[i][k]['chosen'] = true
-						}
-					}
-				}
+		toggleHighlight(student, row, column) {
+			if (this.grid[row][column]['chosen'] == true) {
+				this.grid[row][column]['chosen'] = false
+			} else {
+				this.grid[row][column]['chosen'] = true
 			}
 		}
 	},
@@ -203,7 +197,7 @@ section {
 	opacity: .7;
 }
 
-.chosen {
+.chosen > button {
 	background: var(--yellow);
 }
 

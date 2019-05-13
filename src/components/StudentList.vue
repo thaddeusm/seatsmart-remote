@@ -6,9 +6,9 @@
 			<button v-else @click="clearSearchBox" id="clearSearchBoxButton"><img src="@/assets/closered.svg" alt="close icon"></button>
 		</div>
 		<ul>
-			<li v-for="(student, index) in students" :key="`student${index}`">
+			<li v-for="(student, index) in students" :class="[student.chosen ? 'chosen' : '']" :key="`student${index}${numChosen}`">
 				<button 
-					:class="[student.absent ? 'absent' : '', student.chosen ? 'chosen' : '', 'student-button']" 
+					:class="[student.absent ? 'absent' : '', 'student-button']" 
 					@click="chooseStudent(student)"
 				>
 					{{ student.firstName }} {{ student.lastName }}
@@ -24,7 +24,8 @@ export default {
 	data() {
 		return {
 			term: '',
-			loaded: false
+			loaded: false,
+			numChosen: 0
 		}
 	},
 	props: {
@@ -82,7 +83,7 @@ export default {
 	methods: {
 		chooseStudent(student) {
 			this.$emit('student-chosen', student)
-			
+			this.numChosen++
 			this.toggleHighlight(student)
 		},
 		toggleHighlight(student) {
@@ -149,7 +150,7 @@ li {
 	opacity: .7;
 }
 
-.chosen {
+.chosen > button {
 	background: var(--yellow);
 }
 
