@@ -52,7 +52,7 @@
 					{{ chosenBehavior.Description }}
 				</h6>
 				<button class="cancel-button" @click="resetBehavior"><img src="@/assets/closered.svg" alt="close icon"></button>
-				<textarea v-model="note" placeholder="Your note (optional)..."></textarea>
+				<textarea v-model="note" placeholder="Your note (optional)..." ref="noteText"></textarea>
 			</section>
 			<ActionButtons>
 				<template slot="left">
@@ -158,6 +158,9 @@ export default {
 			}
 		},
 		saveNote() {
+			// try to force mobile keyboard tray to close
+			this.$refs.noteText.blur()
+
 			let actionObj = {}
 
 			if (this.student == 'none') {
