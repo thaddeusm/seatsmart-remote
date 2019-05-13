@@ -126,12 +126,11 @@ export default {
 			console.log(this.students)
 		},
 		routeBack() {
-			// try to force mobile keyboard tray to close
-			this.$refs.noteText.blur()
-
 			if (this.student == 'none' && this.state == 'enter note') {
 				this.state = 'choose students'
 			} else {
+				// try to force mobile keyboard tray to close
+				this.$refs.noteText.blur()
 				this.$router.push(`/?room=${this.room}`)
 			}
 		},
