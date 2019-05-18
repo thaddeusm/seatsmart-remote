@@ -52,7 +52,7 @@
 					{{ chosenBehavior.Description }}
 				</h6>
 				<button class="cancel-button" @click="resetBehavior"><img src="@/assets/closered.svg" alt="close icon"></button>
-				<textarea v-model="note" placeholder="Your note (optional)..." ref="noteText"></textarea>
+				<textarea v-model="note" placeholder="Your note (optional)..."></textarea>
 			</section>
 			<ActionButtons>
 				<template slot="left">
@@ -104,6 +104,9 @@ export default {
 		},
 		behaviors() {
 			return this.$store.state.behaviors
+		},
+		allStudents() {
+			return this.$store.state.students
 		}
 	},
 	methods: {
@@ -129,8 +132,6 @@ export default {
 			if (this.student == 'none' && this.state == 'enter note') {
 				this.state = 'choose students'
 			} else {
-				// try to force mobile keyboard tray to close
-				this.$refs.noteText.blur()
 				this.$router.push(`/?room=${this.room}`)
 			}
 		},
@@ -160,9 +161,6 @@ export default {
 			}
 		},
 		saveNote() {
-			// try to force mobile keyboard tray to close
-			this.$refs.noteText.blur()
-
 			let actionObj = {}
 
 			if (this.student == 'none') {
@@ -172,7 +170,8 @@ export default {
 						data: {
 							behavior: this.chosenBehavior,
 							note: this.note,
-							student: this.students[i]._id
+							student: this.students[i]._id,
+							studentName: this.students[i].firstName
 						}
 					}
 
@@ -180,15 +179,24 @@ export default {
 					this.$router.push(`/?room=${this.room}`)
 				}
 			} else {
+				// get the student's first name
+				let firstName
+				for (let i=0; i<this.allStudents.length; i++) {
+					if (this.allStudents[i]._id == this.student) {
+						firstName = this.allStudents[i].firstName
+						break
+					}
+				}
+
 				actionObj = {
 					name: 'save note',
 					data: {
 						behavior: this.chosenBehavior,
 						note: this.note,
-						student: this.student
+						student: this.student,
+						studentName: firstName
 					}
 				}
-
 				this.$store.dispatch('pushToActionQueue', actionObj)
 				this.$router.push(`/?room=${this.room}`)
 			}

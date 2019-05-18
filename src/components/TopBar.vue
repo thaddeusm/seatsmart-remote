@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header v-if="currentRoute !== '/exit'">
         <section id="left">
             <img src="@/assets/logo.svg" id="logo" alt="seatsmart logo">
         </section>
@@ -40,6 +40,9 @@ export default {
                 return rawName
             }
 
+        },
+        currentRoute() {
+            return this.$route.path
         }
     }
 }

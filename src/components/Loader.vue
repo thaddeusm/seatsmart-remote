@@ -1,5 +1,7 @@
 <template>
-    <div id="loader"></div>
+    <div id="loader">
+        
+    </div>
 </template>
 
 <script>
@@ -14,8 +16,6 @@ export default {
     to {transform: rotate(360deg);}
 }
 
-
-
 div {
     height: 100px;
     width: 100px;
@@ -28,6 +28,6 @@ div {
     animation-name: spin;
     animation-duration: 1s;
     animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-}    
+    animation-timing-function: cubic-bezier(0.45, 0.25, 0.60, 0.95);
+}
 </style>

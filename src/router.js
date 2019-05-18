@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Note from './views/Note.vue'
 import Random from './views/Random.vue'
 import Exit from './views/Exit.vue'
+import NotFound from './views/NotFound.vue'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/exit',
       name: 'exit',
       component: Exit
+    },
+    {
+      path: '*',
+      name: 'error',
+      component: NotFound
     }
   ],
 })

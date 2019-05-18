@@ -1,12 +1,7 @@
 <template>
 	<aside>
-		<button @click="togglePanel">
-			<img v-if="connected" src="@/assets/remoteconnect.svg" alt="remote icon">
-			<img v-else src="@/assets/remotedisconnect.svg" alt="remote icon">
-		</button>
-        <section v-if="panelOpen" id="actionQueue">
-            <!-- todo -->
-        </section>
+		<img v-if="connected" src="@/assets/remoteconnect.svg" alt="remote icon">
+		<img v-else src="@/assets/remotedisconnect.svg" alt="remote icon">
 	</aside>
 </template>
 
@@ -112,18 +107,7 @@ export default {
 </script>
 
 <style scoped>
-#actionQueue {
-    background: var(--yellow);
-}
-
-button {
-	background: none;
-	outline: none;
-	border: none;
-	cursor: pointer;
-}
-
-button > img {
+img {
 	height: 30px;
 }
 </style>

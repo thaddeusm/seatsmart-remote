@@ -175,6 +175,13 @@ export default {
 
 		this.calculateCardSize()
 		this.buildGrid()
+
+		// try to correct mobile keyboard tray distorted sizing
+		let scope = this
+		setTimeout(function() {
+			scope.calculateCardSize()
+			scope.buildGrid()
+		}, 3000, scope)
 	}
 }
 </script>

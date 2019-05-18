@@ -1,9 +1,12 @@
 <template>
 	<main>
-		<img src="@/assets/remotedisconnect.svg" alt="disconnected icon">
+		<img src="@/assets/logo.svg" alt="seatsmart icon">
 		<h2>
-			The remote connecton was closed.
+			Something is wrong here...
 		</h2>
+		<h4>
+			Try to scan the QR code again.
+		</h4>
 	</main>
 </template>
 
@@ -16,10 +19,11 @@ export default {
 <style scoped>
 main {
 	width: 100vw;
-	height: 100vh;
+	height: 90vh;
 	display: grid;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 }
 
 img {
@@ -27,10 +31,15 @@ img {
 	vertical-align: middle;
 	display: block;
 	margin: 0 auto;
+	align-self: flex-end;
 }
 
 h2 {
 	color: var(--light-gray);
+}
+
+h4 {
+	color: var(--yellow);
 	align-self: flex-start;
 }
 </style>
