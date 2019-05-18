@@ -16,10 +16,11 @@ export default {
 <style scoped>
 main {
 	width: 100vw;
-	height: 100vh;
+	height: 90vh;
 	display: grid;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 }
 
 img {
