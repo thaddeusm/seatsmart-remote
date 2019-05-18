@@ -212,13 +212,13 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
 	#studentGrid {
 		display: none;
 	}
 }
 
-@media screen and (min-width: 601px) {
+@media screen and (min-width: 801px) {
 	#studentList {
 		display: none;
 	}
