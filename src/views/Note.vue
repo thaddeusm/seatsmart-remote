@@ -1,8 +1,7 @@
 <template>
 	<main>
-		<header>
-			<img src="@/assets/note.svg" alt="note icon" id="noteIcon">
-			<h5> | {{ state }}</h5>
+		<header v-if="state !== 'choose students'">
+			<h2>{{ state }}</h2>
 		</header>
 		<section v-if="state == 'choose students'">
 			<StudentList 
@@ -48,9 +47,9 @@
 				</ul>
 			</section>
 			<section class="behavior-area" v-else>
-				<h6 :class="[chosenBehavior.Type]">
+				<h5 :class="[chosenBehavior.Type]">
 					{{ chosenBehavior.Description }}
-				</h6>
+				</h5>
 				<button class="cancel-button" @click="resetBehavior"><img src="@/assets/closered.svg" alt="close icon"></button>
 				<textarea v-model="note" placeholder="Your note (optional)..."></textarea>
 			</section>
@@ -125,8 +124,6 @@ export default {
 			} else {
 				this.students.push(student)
 			}
-
-			console.log(this.students)
 		},
 		routeBack() {
 			if (this.student == 'none' && this.state == 'enter note') {
@@ -137,12 +134,10 @@ export default {
 		},
 		displayBehaviorSelection() {
 			if (this.students.length > 0) {
-				this.state = 'enter note'
+				this.state = 'select a behavior'
 			}
 		},
 		setBehavior(behavior, type) {
-			console.log(behavior)
-
 			let obj = {
 				Abbreviation: behavior.Abbreviation,
 				Type: type,
@@ -151,6 +146,8 @@ export default {
 			}
 
 			this.chosenBehavior = obj
+
+			this.state = 'enter a note'
 		},
 		resetBehavior() {
 			this.chosenBehavior = {
@@ -159,6 +156,8 @@ export default {
 				Description: '',
 				Weight: ''
 			}
+
+			this.state = 'select a behavior'
 		},
 		saveNote() {
 			let actionObj = {}
@@ -206,7 +205,7 @@ export default {
 		if (this.student == 'none') {
 			this.state = 'choose students'
 		} else {
-			this.state = 'enter note'
+			this.state = 'select a behavior'
 		}
 	}
 }
@@ -230,14 +229,14 @@ header {
 	margin: 10px 0;
 }
 
-h5 {
+h2 {
 	color: var(--light-gray);
-	margin-left: 10px;
+	margin: 20px auto 10px auto;
 	display: inline-block;
 	vertical-align: middle;
 }
 
-h6 {
+h5 {
 	text-align: center;
 	padding: 10px;
 	vertical-align: middle;
@@ -272,14 +271,6 @@ textarea {
 	font-size: 19px;
 	border: 1px solid var(--gray);
 	outline: none;
-}
-
-#noteIcon {
-	background: var(--yellow);
-	padding: 5px 4px 5px 7px;
-	border-radius: 5px;
-	vertical-align: middle;
-	width: 1.1em;
 }
 
 .action-button {

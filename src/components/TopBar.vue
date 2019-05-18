@@ -1,7 +1,10 @@
 <template>
     <header v-if="currentRoute !== '/exit'">
         <section id="left">
-            <img src="@/assets/logo.svg" id="logo" alt="seatsmart logo">
+            <img v-if="currentRoute == '/'" src="@/assets/logo.svg" id="logo" alt="seatsmart logo">
+            <img v-else-if="currentRoute.indexOf('/note') !== -1" src="@/assets/note.svg" id="noteIcon" class="icon" alt="note icon">
+            <img v-else-if="currentRoute == '/random'" src="@/assets/random.svg" class="icon" alt="random icon">
+            <img v-else src="@/assets/logo.svg" id="logo" alt="seatsmart logo">
         </section>
         <section id="center">
             <h3>{{ name }}</h3>
@@ -31,8 +34,8 @@ export default {
             let rawName = this.$store.state.classInfo.name
 
             if (rawName !== null) {
-                if (rawName.length > 6) {
-                    return rawName.slice(0, 6) + '...'
+                if (rawName.length > 10) {
+                    return rawName.slice(0, 10) + '...'
                 } else {
                     return rawName
                 }
@@ -77,6 +80,17 @@ h3 {
 
 #logo {
     height: 30px;
+}
+
+.icon {
+    background: var(--yellow);
+    height: 22px;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+#noteIcon {
+    padding-right: 1px;
 }
 
 #right {

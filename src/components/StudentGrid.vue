@@ -134,11 +134,11 @@ export default {
 
 			// determine ideal font size
 			if (this.classInfo.columns < 6) {
-				this.cardStyle.fontSize = '17px'
+				this.cardStyle.fontSize = '21px'
 			} else if (this.classInfo.columns > 10) {
-				this.cardStyle.fontSize = '10px'
+				this.cardStyle.fontSize = '13px'
 			} else {
-				this.cardStyle.fontSize = '12px'
+				this.cardStyle.fontSize = '16px'
 			}
 
 			// set sizes and margins

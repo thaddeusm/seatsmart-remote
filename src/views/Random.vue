@@ -1,8 +1,5 @@
 <template>
 	<main>
-		<header>
-			<img src="@/assets/random.svg" alt="random icon" id="randomIcon">
-		</header>
 		<h1>
 			{{ student.firstName }}
 		</h1>
@@ -99,19 +96,6 @@ export default {
 </script>
 
 <style scoped>
-header {
-	text-align: center;
-	margin: 10px 0;
-}
-
-#randomIcon {
-	background: var(--yellow);
-	padding: 5px 7px;
-	border-radius: 5px;
-	vertical-align: middle;
-	width: 1.1em;
-}
-
 #closeButton {
 	cursor: pointer;
 	outline: none;
