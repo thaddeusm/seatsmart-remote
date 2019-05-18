@@ -56,7 +56,7 @@ header {
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto 1fr auto;
     grid-template-areas: "left center right";
     background: var(--black);
 }
