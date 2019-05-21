@@ -52,9 +52,10 @@ export default {
 </script>
 
 <style scoped>
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+@keyframes scale {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.3);}
+    100% {transform: scale(1);}
 }
 
 header {
@@ -84,7 +85,8 @@ h3 {
 }
 
 img {
-    animation-name: fadeIn;
+    animation-name: scale;
+    animation-delay: .8s;
     animation-duration: 1s;
     animation-timing-function: ease-in;
 }
@@ -98,10 +100,6 @@ img {
     height: 22px;
     padding: 4px;
     border-radius: 4px;
-}
-
-#noteIcon {
-    padding-right: 1px;
 }
 
 #right {
