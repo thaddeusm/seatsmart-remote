@@ -1,8 +1,11 @@
 <template>
     <header v-if="currentRoute !== '/exit'">
         <section id="left">
-            <transition name="fade">
-                <img :src="`@/assets/${image}.svg`" :class="[image == 'logo' ? 'logo':'icon']" :alt="`${image} icon`">
+            <transition name="fade" mode="out-in">
+                <img v-if="currentRoute == '/'" src="@/assets/logo.svg" id="logo" alt="seatsmart logo" key="logo">
+                <img v-else-if="currentRoute.indexOf('/note') !== -1" src="@/assets/note.svg" id="noteIcon" class="icon" alt="note icon" key="note">
+                <img v-else-if="currentRoute == '/random'" src="@/assets/random.svg" class="icon" alt="random icon" key="random">
+                <img v-else src="@/assets/logo.svg" id="logo" alt="seatsmart logo" key="logo">
             </transition>
         </section>
         <section id="center">
@@ -45,29 +48,12 @@ export default {
         },
         currentRoute() {
             return this.$route.path
-        },
-        image() {
-            if (this.currentRoute == '/') {
-                return 'logo'
-            } else if (this.currentRoute.indexOf('/note') !== -1) {
-                return 'note'
-            } else if (this.currentRoute == '/random') {
-                return 'random'
-            } else {
-                return 'logo'
-            }
         }
     }
 }
 </script>
 
 <style scoped>
-@keyframes scale {
-    0% {transform: scale(1);}
-    50% {transform: scale(1.3);}
-    100% {transform: scale(1);}
-}
-
 header {
     width: 100%;
     height: 100%;
@@ -94,14 +80,7 @@ h3 {
     color: var(--white);
 }
 
-img {
-    animation-name: scale;
-    animation-delay: .8s;
-    animation-duration: 1s;
-    animation-timing-function: ease-in;
-}
-
-.logo {
+#logo {
     height: 30px;
 }
 
@@ -115,13 +94,5 @@ img {
 #right {
     text-align: right;
     grid-area: right;
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
 }
 </style>
