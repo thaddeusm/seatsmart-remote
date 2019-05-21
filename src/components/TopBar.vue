@@ -1,10 +1,9 @@
 <template>
     <header v-if="currentRoute !== '/exit'">
         <section id="left">
-            <img v-if="currentRoute == '/'" src="@/assets/logo.svg" id="logo" alt="seatsmart logo">
-            <img v-else-if="currentRoute.indexOf('/note') !== -1" src="@/assets/note.svg" id="noteIcon" class="icon" alt="note icon">
-            <img v-else-if="currentRoute == '/random'" src="@/assets/random.svg" class="icon" alt="random icon">
-            <img v-else src="@/assets/logo.svg" id="logo" alt="seatsmart logo">
+            <transition name="fade">
+                <img :src="`@/assets/${image}.svg`" :class="[image == 'logo' ? 'logo':'icon']" :alt="`${image} icon`">
+            </transition>
         </section>
         <section id="center">
             <h3>{{ name }}</h3>
@@ -46,6 +45,17 @@ export default {
         },
         currentRoute() {
             return this.$route.path
+        },
+        image() {
+            if (this.currentRoute == '/') {
+                return 'logo'
+            } else if (this.currentRoute.indexOf('/note') !== -1) {
+                return 'note'
+            } else if (this.currentRoute == '/random') {
+                return 'random'
+            } else {
+                return 'logo'
+            }
         }
     }
 }
@@ -91,7 +101,7 @@ img {
     animation-timing-function: ease-in;
 }
 
-#logo {
+.logo {
     height: 30px;
 }
 
@@ -105,5 +115,13 @@ img {
 #right {
     text-align: right;
     grid-area: right;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
