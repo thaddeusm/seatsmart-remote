@@ -52,6 +52,11 @@ export default {
 </script>
 
 <style scoped>
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
 header {
     width: 100%;
     height: 100%;
@@ -76,6 +81,12 @@ section {
 
 h3 {
     color: var(--white);
+}
+
+img {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
 }
 
 #logo {

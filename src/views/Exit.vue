@@ -16,7 +16,7 @@ export default {
 <style scoped>
 main {
 	width: 100vw;
-	height: 90vh;
+	height: 80vh;
 	display: grid;
 	justify-content: center;
 	align-items: center;
