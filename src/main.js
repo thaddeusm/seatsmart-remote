@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
 import SocketIO from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io'
@@ -13,12 +13,8 @@ Vue.use(new VueSocketIO({
     connection: SocketIO('https://seatsmart-remote-server.now.sh')
 }))
 
-import vCascade from 'v-cascade'
-
-Vue.use(vCascade)
-
 new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app');
+}).$mount('#app')

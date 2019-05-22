@@ -28,6 +28,7 @@ export default {
         actionQueue(newValue, oldValue) {
             if (newValue.length !== 0) {
                 for (let i=0; i<newValue.length; i++) {
+                    // dispatch actions to server when items are present in the queue
                     this.$socket.emit('initAction', this.encrypt(newValue[i]))
                 }
             }
@@ -35,7 +36,7 @@ export default {
     },
     sockets: {
         roomJoined() {
-            console.log('joined the room:', this.roomID)
+            // update UI on connection and request data from desktop application (host)
             this.connected = true
             this.$socket.emit('requestData')
         },
@@ -64,9 +65,7 @@ export default {
             this.joinRoom()
         },
         deviceDisconnection() {
-            // detect host disconnection
-            console.log('host disconnected')
-
+            // detect and display host disconnection
             this.connected = false
         },
         sessionEnded() {
@@ -74,6 +73,7 @@ export default {
             this.$router.push('/exit')
         },
         confirmAction(id) {
+            // when host application completes action, remove action from queue
             this.$store.dispatch('removeFromActionQueue', this.decrypt(id))
         }
     },
@@ -83,6 +83,7 @@ export default {
     	},
         joinRoom() {
             if (this.roomID !== undefined) {
+                // use URL query to join secure channel (Socket room)
                 this.$socket.emit('joinRoom', this.roomID)
             }
         },

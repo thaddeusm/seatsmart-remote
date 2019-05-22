@@ -54,6 +54,7 @@ export default {
 				}
 			}
 
+			// filter students if search term provided
 			if (this.term !== '') {
 				let unformattedTerm = this.term.toLowerCase().split(' ').join('')
 
@@ -75,13 +76,11 @@ export default {
 				this.loaded = true
 				this.filterStudents()
 			}
-		},
-		term(newValue, oldValue) {
-			this.filterStudents()
 		}
 	},
 	methods: {
 		chooseStudent(student) {
+			// react to student selection
 			this.$emit('student-chosen', student)
 			this.numChosen++
 			this.toggleHighlight(student)
@@ -97,28 +96,15 @@ export default {
 				}
 			}
 		},
-		addAbsences() {
-			for (let i=0; i<this.absentStudents.length; i++) {
-				for (let k=0; k<this.students.length; k++) {
-					if (this.absentStudents[i] == this.students[k]._id) {
-						this.students[k]['absent'] = true
-					}
-				}
-			}
-		},
 		clearSearchBox() {
 			this.term = ''
 			this.$refs.listContainer.focus()
-		},
-		filterStudents() {
-			
 		}
 	},
 	mounted() {
 		if (this.allStudents.length > 0) {
 			this.$emit('list-loaded')
 			this.loaded = true
-			// this.filterStudents()
 		}
 	}
 }

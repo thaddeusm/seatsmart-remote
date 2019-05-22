@@ -76,6 +76,8 @@ export default {
 	},
 	methods: {
 		buildGrid() {
+			// place students into grid according to their assigned seats
+
 			this.grid = []
 
 			for (let i=0; i<this.classInfo.rows; i++) {
@@ -176,7 +178,7 @@ export default {
 		this.calculateCardSize()
 		this.buildGrid()
 
-		// try to correct mobile keyboard tray distorted sizing
+		// try to correct distorted sizing due to mobile keyboard trays
 		let scope = this
 		setTimeout(function() {
 			scope.calculateCardSize()

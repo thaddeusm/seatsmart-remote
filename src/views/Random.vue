@@ -90,7 +90,6 @@ export default {
 	},
 	mounted() {
 		this.sendRandomToHost()
-		
 	}
 }
 </script>

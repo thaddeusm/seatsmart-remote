@@ -61,6 +61,7 @@ export default {
 	},
 	methods: {
 		routeToNote(student) {
+			// when a student is selected, pass their id to add note view
 			this.$router.push(`/note/${student._id}`)
 		}
 	},

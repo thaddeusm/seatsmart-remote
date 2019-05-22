@@ -110,6 +110,7 @@ export default {
 	},
 	methods: {
 		toggleAddStudent(student) {
+			// add/remove selected students for new notes
 			let studentIndex = -1
 
 			for (let i=0; i<this.students.length; i++) {
@@ -126,6 +127,7 @@ export default {
 			}
 		},
 		routeBack() {
+			// decide what "back" means
 			if (this.student == 'none' && this.state == 'enter note') {
 				this.state = 'choose students'
 			} else {
@@ -161,7 +163,7 @@ export default {
 		},
 		saveNote() {
 			let actionObj = {}
-
+			// loop through selected students
 			if (this.student == 'none') {
 				for (let i=0; i<this.students.length; i++) {
 					actionObj = {
@@ -177,6 +179,7 @@ export default {
 					this.$store.dispatch('pushToActionQueue', actionObj)
 					this.$router.push(`/?room=${this.room}`)
 				}
+			// or save note for one student
 			} else {
 				// get the student's first name
 				let firstName
