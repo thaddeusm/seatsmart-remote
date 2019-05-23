@@ -21,6 +21,10 @@ main {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+	grid-template-rows: 1fr 1fr;
+	grid-template-areas: 
+		"image"
+		"message";
 }
 
 img {
@@ -28,10 +32,12 @@ img {
 	vertical-align: middle;
 	display: block;
 	margin: 0 auto;
+	grid-area: image;
 }
 
 h2 {
 	color: var(--light-gray);
 	align-self: flex-start;
+	grid-area: message;
 }
 </style>
