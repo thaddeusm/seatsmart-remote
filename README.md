@@ -19,7 +19,7 @@ remote features are only meant to add utility.
 
 ## Design
 The application is mobile-first by its nature, with the original design work 
-based upon the form factor of a iPhone SE.  The design was then expanded to 
+based upon the form factor of an iPhone SE.  The design was then expanded to 
 support landscape resolutions of larger tablets, offering a presentation of 
 students' seating similar to the original desktop application.
 
