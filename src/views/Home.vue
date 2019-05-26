@@ -15,7 +15,7 @@
 		/>
 		<ActionButtons>
 			<template slot="left">
-				<button class="action-button" @click="$router.push('/note/none')">
+				<button class="action-button" @click="$router.push('/note/none')" :disabled="absentStudents.length == students.length || students.length - absentStudents.length < 2">
 					<img src="@/assets/note.svg" alt="note icon">
 				</button>
 			</template>
