@@ -74,7 +74,6 @@ export default {
 			if (newValue.length > 0) {
 				this.$emit('list-loaded')
 				this.loaded = true
-				this.filterStudents()
 			}
 		}
 	},
@@ -142,6 +141,7 @@ li {
 
 #searchArea {
 	text-align: center;
+	margin-left: -10px;
 }
 
 #searchIcon {
@@ -167,7 +167,7 @@ li {
 input {
 	border-radius: 4px;
 	font-size: 19px;
-	padding: 7px 10px 9px 10px;
+	padding: 9px 10px 9px 10px;
 	margin: 20px auto;
 	width: 180px;
 	color: var(--black);
