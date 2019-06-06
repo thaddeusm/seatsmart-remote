@@ -149,7 +149,13 @@ export default {
 
 			this.chosenBehavior = obj
 
-			this.state = 'enter a note'
+			// provide UI feedback about students to receive a note note
+			if (this.student !== "none") {
+				this.state = `enter a note about ${this.findStudentName(this.student)}`
+			} else {
+				this.state = `enter a note about ${this.students.length} students`
+			}
+			
 		},
 		resetBehavior() {
 			this.chosenBehavior = {
@@ -160,6 +166,14 @@ export default {
 			}
 
 			this.state = 'select a behavior'
+		},
+		findStudentName(id) {
+			for (let i=0; i<this.allStudents.length; i++) {
+				if (this.allStudents[i]._id == id) {
+					return this.allStudents[i].firstName
+					break
+				}
+			}
 		},
 		saveNote() {
 			let actionObj = {}
