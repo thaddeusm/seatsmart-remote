@@ -89,7 +89,7 @@ export default {
 	}
 
 	#loader {
-		margin-top: 170px;
+		margin-top: 120px;
 	}
 }
 
