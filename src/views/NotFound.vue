@@ -1,6 +1,5 @@
 <template>
 	<main>
-		<img src="@/assets/logo.svg" alt="seatsmart icon">
 		<h2>
 			Something is wrong here...
 		</h2>
@@ -24,14 +23,6 @@ main {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-}
-
-img {
-	width: 4em;
-	vertical-align: middle;
-	display: block;
-	margin: 0 auto;
-	align-self: flex-end;
 }
 
 h2 {

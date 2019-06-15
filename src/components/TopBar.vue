@@ -5,7 +5,7 @@
                 <img v-if="currentRoute == '/'" src="@/assets/logo.svg" class="icon" alt="seatsmart logo" key="logo">
                 <img v-else-if="currentRoute.indexOf('/note') !== -1" src="@/assets/note-icon.svg" class="icon" alt="note icon" key="note">
                 <img v-else-if="currentRoute == '/random'" src="@/assets/random-icon.svg" class="icon" alt="random icon" key="random">
-                <img v-else src="@/assets/logo.svg" id="logo" alt="seatsmart logo" key="logo">
+                <img v-else src="@/assets/logo.svg" class="icon" alt="seatsmart logo" key="logo">
             </transition>
         </section>
         <section id="center">
