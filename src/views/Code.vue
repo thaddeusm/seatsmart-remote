@@ -84,12 +84,25 @@ export default {
 </script>
 
 <style scoped>
+main {
+	width: 100vw;
+	height: 80vh;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	grid-template-rows: 30% 1fr;
+	grid-template-areas: 
+		"instructions"
+		"form";
+}
+
 h2 {
 	color: var(--light-gray);
-	margin: 20px auto 10px auto;
 	display: block;
 	vertical-align: middle;
 	text-align: center;
+	grid-area: instructions;
 }
 
 button {
@@ -106,6 +119,8 @@ button {
 
 section {
 	text-align: center;
+	grid-area: form;
+	align-self: flex-start;
 }
 
 input {
