@@ -12,8 +12,7 @@ export default {
 	name: 'Status',
 	data() {
 		return {
-			connected: false,
-            panelOpen: false
+			connected: false
 		}
 	},
     computed: {
@@ -32,6 +31,9 @@ export default {
                     this.$socket.emit('initAction', this.encrypt(newValue[i]))
                 }
             }
+        },
+        roomID(newValue, oldValue) {
+            this.joinRoom()
         }
     },
     sockets: {
