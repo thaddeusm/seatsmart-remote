@@ -9,7 +9,14 @@
 
 <script>
 export default {
-	name: 'Exit'
+	name: 'Exit',
+	mounted() {
+		let scope = this
+
+		scope.setTimeout(function, {
+			scope.$router.push('/code')
+		}, 3000, scope)
+	}
 }
 </script>
 
