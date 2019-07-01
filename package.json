@@ -50,5 +50,14 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "vue": {
+    "pwa": {
+      "name": "Remote",
+      "themeColor": "#FCBB04",
+      "msTileColor": "#FFFFFF",
+      "appleMobileWebAppCapable": "yes",
+      "appleMobileWebAppStatusBarStyle": "black"
+    }
+  }
 }
