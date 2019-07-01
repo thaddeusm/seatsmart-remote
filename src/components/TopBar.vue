@@ -1,5 +1,5 @@
 <template>
-    <header v-if="currentRoute !== '/exit'">
+    <header v-if="currentRoute !== '/exit' && currentRoute !== '/code'">
         <section id="left">
             <transition name="fade" mode="out-in">
                 <img v-if="currentRoute == '/'" src="@/assets/logo.svg" class="icon" alt="seatsmart logo" key="logo">
