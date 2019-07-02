@@ -36,7 +36,7 @@ export default {
 						return 'choose a random student'
 						break
 					case 'save note':
-						return `save a note for ${action.action.data.studentName}`
+						return `save a note about ${action.action.data.studentName}`
 						break
 					case 'disable random':
 						return 'turn off student selector'
@@ -51,7 +51,7 @@ export default {
 						return 'chose a random student'
 						break
 					case 'save note':
-						return `saved a note for ${action.action.data.studentName}`
+						return `saved a note about ${action.action.data.studentName}`
 						break
 					case 'disable random':
 						return 'turned off student selector'
