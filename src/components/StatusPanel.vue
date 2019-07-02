@@ -47,7 +47,7 @@ export default {
 						return 'choose a random student'
 						break
 					case 'save note':
-						return `save a note about ${action.action.data.studentName}`
+						return `save a note about ${this.shortenName(action.action.data.studentName)}`
 						break
 					case 'disable random':
 						return 'turn off student selector'
@@ -62,7 +62,7 @@ export default {
 						return 'chose a random student'
 						break
 					case 'save note':
-						return `saved a note about ${action.action.data.studentName}`
+						return `saved a note about ${this.shortenName(action.action.data.studentName)}`
 						break
 					case 'disable random':
 						return 'turned off student selector'
@@ -75,6 +75,13 @@ export default {
 		disconnectRemote() {
 			this.$store.dispatch('resetStore')
 			this.$router.push('/exit')
+		},
+		shortenName(name) {
+			if (name.length > 5) {
+				return name.slice(0, 5) + '...'
+			} else {
+				return name
+			}
 		}
 	}
 }
