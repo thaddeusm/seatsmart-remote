@@ -24,7 +24,8 @@ export default new Vuex.Store({
             positive: [],
             negative: []
         },
-        actionQueue: []
+        actionQueue: [],
+        completedActions: []
     },
     mutations: {
     	setRoomID(state, roomID) {
@@ -57,15 +58,22 @@ export default new Vuex.Store({
             })
         },
         removeFromActionQueue(state, actionId) {
+            let action
+
             for (let i=0; i<state.actionQueue.length; i++) {
                 if (state.actionQueue[i].id == actionId) {
-                    state.actionQueue.splice(i, 1)
-                    break;
+                    action = state.actionQueue.splice(i, 1)
+                    break
                 }
             }
+            
+            state.completedActions.push(action[0])
         },
         clearActionQueue(state) {
             state.actionQueue = []
+        },
+        clearCompletedActions(state) {
+            state.completedActions = []
         }
     },
     actions: {
@@ -115,6 +123,7 @@ export default new Vuex.Store({
                 negative: []
             })
             context.commit('clearActionQueue')
+            context.commit('clearCompletedActions')
         }
     }
 })

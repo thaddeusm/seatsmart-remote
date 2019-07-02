@@ -1,18 +1,28 @@
 <template>
 	<aside>
-		<img v-if="connected" src="@/assets/remoteconnect.svg" alt="remote icon">
-		<img v-else src="@/assets/remotedisconnect.svg" alt="remote icon">
+        <button @click="openStatusPanel">
+            <img v-if="connected" src="@/assets/remoteconnect.svg" alt="remote icon">
+            <img v-else src="@/assets/remotedisconnect.svg" alt="remote icon">
+        </button>
+        <transition name="slide">
+            <StatusPanel v-if="showPanel" v-on:close-panel="closeStatusPanel" />
+        </transition>
 	</aside>
 </template>
 
 <script>
 import sjcl from 'sjcl'
+import StatusPanel from '@/components/StatusPanel.vue'
 
 export default {
 	name: 'Status',
+    components: {
+        StatusPanel
+    },
 	data() {
 		return {
-			connected: false
+			connected: false,
+            showPanel: false
 		}
 	},
     computed: {
@@ -80,9 +90,12 @@ export default {
         }
     },
     methods: {
-    	togglePanel() {
-            this.panelOpen = !this.togglePanel
-    	},
+    	openStatusPanel() {
+            this.showPanel = true
+        },
+        closeStatusPanel() {
+            this.showPanel = false
+        },
         joinRoom() {
             if (this.roomID !== undefined) {
                 // use URL query to join secure channel (Socket room)
@@ -112,5 +125,21 @@ export default {
 <style scoped>
 img {
 	height: 30px;
+}
+
+.slide-enter-active {
+    animation-name: slideIn;
+    animation-duration: .5s;
+}
+
+.slide-leave-active {
+    animation-name: slideIn;
+    animation-duration: .2s;
+    animation-direction: reverse;
+}
+
+@keyframes slideIn {
+    from {transform: translateX(300px);}
+    to {transform: translateX(0px);}
 }
 </style>

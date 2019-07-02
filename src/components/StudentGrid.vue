@@ -232,6 +232,6 @@ button {
 	transition: .05s border ease;
 	vertical-align: middle;
 	justify-self: center;
-	align-self: center;
+	align-items: center;
 }
 </style>

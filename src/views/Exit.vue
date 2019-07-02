@@ -2,7 +2,7 @@
 	<main>
 		<img src="@/assets/remotedisconnect.svg" alt="disconnected icon">
 		<h2>
-			The remote connecton was closed.
+			The remote is disconnected.
 		</h2>
 	</main>
 </template>
