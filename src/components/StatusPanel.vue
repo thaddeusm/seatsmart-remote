@@ -98,6 +98,7 @@ export default {
 	background: var(--yellow);
 	z-index: 2000;
 	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 	box-shadow: -2px 0 7px var(--gray)
 }
 
