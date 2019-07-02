@@ -63,6 +63,9 @@ export default new Vuex.Store({
                     break;
                 }
             }
+        },
+        clearActionQueue(state) {
+            state.actionQueue = []
         }
     },
     actions: {
@@ -111,6 +114,7 @@ export default new Vuex.Store({
                 positive: [],
                 negative: []
             })
+            context.commit('clearActionQueue')
         }
     }
 })
