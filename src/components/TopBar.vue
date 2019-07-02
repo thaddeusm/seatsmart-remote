@@ -1,7 +1,7 @@
 <template>
     <header v-if="currentRoute !== '/exit' && currentRoute !== '/code'">
         <section id="left">
-            <transition name="fade" mode="out-in">
+            <transition name="flip">
                 <img v-if="currentRoute == '/'" src="@/assets/logo.svg" class="icon" alt="seatsmart logo" key="logo">
                 <img v-else-if="currentRoute.indexOf('/note') !== -1" src="@/assets/note-icon.svg" class="icon" alt="note icon" key="note">
                 <img v-else-if="currentRoute == '/random'" src="@/assets/random-icon.svg" class="icon" alt="random icon" key="random">
@@ -84,5 +84,20 @@ h3 {
 #right {
     text-align: right;
     grid-area: right;
+}
+
+.flip-enter-active {
+    animation-name: flip;
+    animation-duration: .5s;
+}
+
+.flip-enter-active {
+    animation-name: flip;
+    animation-duration: .5s;
+}
+
+@keyframes flip {
+    from {transform: rotateX(90deg);}
+    to {transform: rotateX(0deg);}
 }
 </style>

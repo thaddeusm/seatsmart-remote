@@ -75,7 +75,7 @@ export default {
 	top: 0;
 	right: 0;
 	bottom: 0;
-	width: 300px;
+	width: 250px;
 	height: 100vh;
 	background: var(--yellow);
 	z-index: 2000;

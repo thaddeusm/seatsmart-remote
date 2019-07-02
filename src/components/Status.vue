@@ -153,7 +153,7 @@ img {
 }
 
 @keyframes slideIn {
-    from {transform: translateX(300px);}
+    from {transform: translateX(250px);}
     to {transform: translateX(0px);}
 }
 </style>
