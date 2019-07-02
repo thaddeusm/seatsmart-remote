@@ -40,7 +40,7 @@
 				v-model="fourth"
 				@keyup.enter="startRoomEntry" 
 			>
-			<button @click="startRoomEntry">Start</button>
+			<button @click="startRoomEntry">start</button>
 		</section>
 	</main>
 </template>
@@ -111,7 +111,7 @@ button {
 	padding: 5px 10px;
 	background: var(--yellow);
 	color: var(--black);
-	font-size: 18px;
+	font-size: 20px;
 	border-radius: 5px;
 	cursor: pointer;
 	outline: none;
@@ -127,7 +127,7 @@ section {
 
 input {
 	border-radius: 4px;
-	font-size: 19px;
+	font-size: 24px;
 	padding: 9px 10px 9px 10px;
 	margin: 20px 5px;
 	width: 25px;

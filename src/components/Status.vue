@@ -5,7 +5,7 @@
             <img v-else src="@/assets/remotedisconnect.svg" alt="remote icon">
         </button>
         <transition name="slide">
-            <StatusPanel v-if="showPanel" v-on:close-panel="closeStatusPanel" />
+            <StatusPanel v-if="showPanel" v-on:close-panel="closeStatusPanel" :connected="connected" />
         </transition>
 	</aside>
 </template>

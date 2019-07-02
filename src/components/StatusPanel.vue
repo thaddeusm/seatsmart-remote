@@ -1,33 +1,44 @@
 <template>
 	<div id="panelContainer">
 		<div id="panelHeader">
+			<h3>{{ connected ? 'Connected' : 'Reconnecting...' }}</h3>
 			<button @click="$emit('close-panel')">
-				<img src="@/assets/closeblack.svg" alt="close icon">
+				<img id="close" src="@/assets/closeblack.svg" alt="close icon">
 			</button>
 		</div>
 		<div id="panelBody">
-			<h3 v-if="pendingActions.length > 0">Pending</h3>
+			<h4 v-if="pendingActions.length > 0">Pending</h4>
 			<ul>
 				<li v-for="action in pendingActions">
 					{{ action }}
+					<Loader size="small" v-if="pendingActions.length > 0" />
 				</li>
 			</ul>
-			<h3 v-if="completedActions.length > 0">Completed</h3>
+			<h4 v-if="completedActions.length > 0">Completed</h4>
 			<ul>
 				<li v-for="action in completedActions">
 					{{ action }}
+					<img id="check" src="@/assets/checkmark.svg" alt="checkmark">
 				</li>
 			</ul>
 		</div>
 		<div id="panelFooter">
-			<button id="disconnectButton" @click="disconnectRemote">Disconnect Remote</button>
+			<button id="disconnectButton" @click="disconnectRemote">disconnect remote</button>
 		</div>
 	</div>
 </template>
 
 <script>
+import Loader from '@/components/Loader.vue'
+
 export default {
 	name: 'StatusPanel',
+	props: {
+		connected: Boolean
+	},
+	components: {
+		Loader
+	},
 	computed: {
 		pendingActions() {
 			return this.$store.state.actionQueue.map((action) => {
@@ -83,36 +94,61 @@ export default {
 	box-shadow: -2px 0 7px var(--gray)
 }
 
-h3 {
+#panelHeader {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-template-areas: "status closeButton";
+	align-items: center;
+	padding: 10px;
+}
+
+#panelHeader > h3 {
+	grid-area: status;
+	text-align: left;
+}
+
+#panelHeader > button {
+	grid-area: closeButton;
+}
+
+h4 {
 	text-align: center;
+	margin-top: 40px;
 }
 
 ul {
 	list-style: none;
 	text-align: left;
-	margin-bottom: 40px
 }
 
 li {
 	margin: 20px 10px;
 	padding: 10px;
+	font-size: 18px;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: center;
 	background: var(--light-gray);
 }
 
-img {
+#close {
 	height: 30px;
-	padding: 10px 10px 0 0;
+	vertical-align: middle;
+}
+
+#check {
+	height: 14px;
 }
 
 #disconnectButton {
 	padding: 5px 10px;
 	background: var(--red);
 	color: var(--white);
-	font-size: 18px;
+	font-size: 20px;
 	border-radius: 5px;
 	cursor: pointer;
 	outline: none;
 	display: block;
-	margin: 40px auto;
+	margin: 60px auto;
 }
 </style>
