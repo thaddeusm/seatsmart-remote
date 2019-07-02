@@ -1,6 +1,6 @@
 <template>
 	<aside>
-        <button @click="openStatusPanel">
+        <button @click="openStatusPanel" id="statusPanelToggleButton">
             <img v-if="connected" src="@/assets/remoteconnect.svg" alt="remote icon">
             <img v-else src="@/assets/remotedisconnect.svg" alt="remote icon">
         </button>
@@ -92,9 +92,23 @@ export default {
     methods: {
     	openStatusPanel() {
             this.showPanel = true
+
+            document.body.style.overflowY = 'hidden'
+
+            document.body.addEventListener('click', this.checkClickTarget)
         },
         closeStatusPanel() {
             this.showPanel = false
+
+            document.body.style.overflowY = 'auto'
+
+            document.body.removeEventListener('click', this.checkClickTarget)
+        },
+        checkClickTarget(event) {
+            console.log(event.target)
+            if (event.target.tagName !== "IMG" && event.target.parentNode.id !== "panelContainer" && event.target.id !== "panelContainer") {
+                this.closeStatusPanel()
+            }
         },
         joinRoom() {
             if (this.roomID !== undefined) {
