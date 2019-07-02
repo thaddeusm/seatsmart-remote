@@ -38,9 +38,9 @@
 				max="9" 
 				required 
 				v-model="fourth"
-				@keyup.enter="checkRoom" 
+				@keyup.enter="startRoomEntry" 
 			>
-			<button @click="checkRoom">Enter</button>
+			<button @click="startRoomEntry">Start</button>
 		</section>
 	</main>
 </template>
@@ -50,7 +50,7 @@ export default {
 	name: 'Code',
 	data() {
 		return {
-			instructions: 'enter the 4-digit code',
+			instructions: 'Enter the 4-digit code.',
 			first: null,
 			second: null,
 			third: null,
@@ -58,7 +58,7 @@ export default {
 		}
 	},
 	methods: {
-		checkRoom() {
+		startRoomEntry() {
 			if (this.inputsComplete() == true) {
 				let roomNumber = this.first + '' + this.second + '' + this.third + this.fourth
 
@@ -69,7 +69,7 @@ export default {
 			if (this.first !== null && this.second !== null && this.third !== null && this.fourth !== null) {
 				return true
 			} else {
-				this.instructions = 'please try again'
+				this.instructions = 'Please try again.'
 				return false
 			}
 		},

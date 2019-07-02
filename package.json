@@ -57,7 +57,10 @@
       "themeColor": "#FCBB04",
       "msTileColor": "#FFFFFF",
       "appleMobileWebAppCapable": "yes",
-      "appleMobileWebAppStatusBarStyle": "black"
+      "appleMobileWebAppStatusBarStyle": "black",
+      "workboxOptions": {
+        "exclude": "store.js"
+      }
     }
   }
 }
