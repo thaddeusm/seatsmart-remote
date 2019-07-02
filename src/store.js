@@ -95,7 +95,7 @@ export default new Vuex.Store({
         },
         resetStore(context) {
             context.commit('setRoomID', '')
-            context.commit('setClassInfo', classInfo: {
+            context.commit('setClassInfo', {
                 name: null,
                 columns: null,
                 rows: null,
