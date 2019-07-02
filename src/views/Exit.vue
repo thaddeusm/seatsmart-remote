@@ -10,12 +10,21 @@
 <script>
 export default {
 	name: 'Exit',
-	mounted() {
-		let scope = this
+	methods: {
+		resetStore() {
+			this.$store.dispatch('resetStore')
+		},
+		routeToCodeView() {
+			let scope = this
 
-		setTimeout(function() {
-			scope.$router.push('/code')
-		}, 3000, scope)
+			setTimeout(function() {
+				scope.$router.push('/code')
+			}, 3000, scope)
+		}
+	},
+	mounted() {
+		this.resetStore()
+		this.routeToCodeView()
 	}
 }
 </script>

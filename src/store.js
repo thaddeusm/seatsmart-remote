@@ -92,6 +92,25 @@ export default new Vuex.Store({
         },
         removeFromActionQueue(context, actionId) {
             context.commit('removeFromActionQueue', actionId)
+        },
+        resetStore(context) {
+            context.commit('setRoomID', '')
+            context.commit('setClassInfo', classInfo: {
+                name: null,
+                columns: null,
+                rows: null,
+                _id: null,
+                semester: null,
+                year: null,
+                archived: null
+            })
+            context.commit('setStudents', [])
+            context.commit('setAbsentStudents', [])
+            context.commit('setRandomStudent', 0)
+            context.commit('setBehaviors', {
+                positive: [],
+                negative: []
+            })
         }
     }
 })

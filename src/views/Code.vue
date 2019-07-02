@@ -11,7 +11,7 @@
 				max="9" 
 				required 
 				v-model="first" 
-				@keyup="moveInput('second')"
+				@keyup="moveInput('first', 'second')"
 			>
 			<input 
 				ref="second" 
@@ -20,7 +20,7 @@
 				max="9" 
 				required 
 				v-model="second" 
-				@keyup="moveInput('third')"
+				@keyup="moveInput('second', 'third')"
 			>
 			<input 
 				ref="third" 
@@ -29,7 +29,7 @@
 				max="9" 
 				required 
 				v-model="third" 
-				@keyup="moveInput('fourth')"
+				@keyup="moveInput('third', 'fourth')"
 			>
 			<input 
 				ref="fourth" 
@@ -73,8 +73,10 @@ export default {
 				return false
 			}
 		},
-		moveInput(input) {
-			this.$refs[input].focus()
+		moveInput(from, to) {
+			if (this.$refs[from].value !== '' && this.$refs[from].value !== ' ') {
+				this.$refs[to].focus()
+			}
 		}
 	},
 	mounted() {
