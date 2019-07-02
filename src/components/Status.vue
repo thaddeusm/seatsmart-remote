@@ -93,14 +93,17 @@ export default {
     	openStatusPanel() {
             this.showPanel = true
 
-            document.body.style.overflowY = 'hidden'
+            document.body.style.overflow = 'hidden'
+            document.body.style.position = 'fixed'
+
 
             document.body.addEventListener('click', this.checkClickTarget)
         },
         closeStatusPanel() {
             this.showPanel = false
 
-            document.body.style.overflowY = 'auto'
+            document.body.style.overflow = 'auto'
+            document.body.style.position = 'static'
 
             document.body.removeEventListener('click', this.checkClickTarget)
         },
