@@ -41,7 +41,13 @@ export default {
 	},
 	computed: {
 		pendingActions() {
-			return this.$store.state.actionQueue.map((action) => {
+			return this.$store.state.actionQueue.filter((action) => {
+				if (action.action.name == 'disable random') {
+					return false
+				} else {
+					return true
+				}
+			}).map((action) => {
 				switch (action.action.name) {
 					case 'choose random':
 						return 'choose a random student'
@@ -49,23 +55,23 @@ export default {
 					case 'save note':
 						return `save a note about ${this.shortenName(action.action.data.studentName)}`
 						break
-					case 'disable random':
-						return 'turn off student selector'
-						break
 				}
 			})
 		},
 		completedActions() {
-			return this.$store.state.completedActions.map((action) => {
+			return this.$store.state.completedActions.filter((action) => {
+				if (action.action.name == 'disable random') {
+					return false
+				} else {
+					return true
+				}
+			}).map((action) => {
 				switch (action.action.name) {
 					case 'choose random':
 						return 'chose a random student'
 						break
 					case 'save note':
 						return `saved a note about ${this.shortenName(action.action.data.studentName)}`
-						break
-					case 'disable random':
-						return 'turned off student selector'
 						break
 				}
 			})
