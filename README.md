@@ -1,4 +1,4 @@
-![Seatsmart Icon](https://seatsmart.now.sh/img/logo.b38f8b88.svg)
+![Seatsmart Icon](https://seatsmart.tech/img/logo.b38f8b88.svg)
 
 # Seatsmart Remote
 This web-based remote UI communicates in realtime with the desktop application 
