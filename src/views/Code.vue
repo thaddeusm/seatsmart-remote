@@ -128,9 +128,9 @@ section {
 input {
 	border-radius: 4px;
 	font-size: 24px;
-	padding: 9px 10px 9px 10px;
+	padding: 7px 5px 7px 10px;
 	margin: 20px 5px;
-	width: 25px;
+	width: 35px;
 	color: var(--black);
 	border: 2px solid var(--light-gray);
 	outline: none;
