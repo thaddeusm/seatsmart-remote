@@ -12,6 +12,7 @@
     {"src": "/manifest.json", "headers": {"cache-control": "max-age=31536000,immutable"}, "dest": "/manifest.json"},
     {"src": "/service-worker.js", "headers": {"cache-control": "max-age=31536000,immutable"}, "dest": "/service-worker.js"},
     {"src": "/robots.txt", "headers": {"cache-control": "max-age=31536000,immutable"}, "dest": "/robots.txt"},
+    {"src": "^/precache-manifest.(.*)", "dest": "/precache-manifest.$1"},
     {"src": ".*", "headers": {"cache-control": "max-age=0,must-revalidate"}, "dest": "/index.html"}
   ]
 }
