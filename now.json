@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "alias": "remote.seatsmart.tech",
   "name": "seatsmart-remote",
   "builds": [{ "src": "package.json", "use": "@now/static-build" }],
   "routes": [
