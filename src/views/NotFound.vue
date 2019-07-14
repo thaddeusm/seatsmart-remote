@@ -11,7 +11,19 @@
 
 <script>
 export default {
-	name: 'Exit'
+	name: 'Exit',
+	methods: {
+		routeToCodeView() {
+			let scope = this
+
+			setTimeout(function() {
+				scope.$router.push('/code')
+			}, 3000, scope)
+		}
+	},
+	mounted() {
+		this.routeToCodeView()
+	}
 }
 </script>
 

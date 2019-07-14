@@ -84,6 +84,10 @@ export default {
             // kick out client when host leaves / cancels connection
             this.$router.push('/exit')
         },
+        roomJoinRejected() {
+            // display error message when room code is incorrect
+            this.$router.push('/error')
+        },
         confirmAction(id) {
             // when host application completes action, remove action from queue
             this.$store.dispatch('removeFromActionQueue', this.decrypt(id))
