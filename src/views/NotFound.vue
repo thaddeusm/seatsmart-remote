@@ -18,7 +18,7 @@ export default {
 
 			setTimeout(function() {
 				scope.$router.push('/code')
-			}, 3000, scope)
+			}, 5000, scope)
 		}
 	},
 	mounted() {
