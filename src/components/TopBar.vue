@@ -9,7 +9,8 @@
             </transition>
         </section>
         <section id="center">
-            <h3>{{ name }}</h3>
+            <h3 class="short-name">{{ shortName }}</h3>
+            <h3 class="long-name">{{ longName }}</h3>
         </section>
         <section id="right">
             <Status />
@@ -26,9 +27,9 @@ export default {
         Status
     },
     computed: {
-        name() {
+        shortName() {
             // shorten long class names
-            let rawName = this.$store.state.classInfo.name
+            let rawName = this.longName
 
             if (rawName !== null) {
                 if (rawName.length > 10) {
@@ -40,6 +41,9 @@ export default {
                 return rawName
             }
 
+        },
+        longName() {
+            return this.$store.state.classInfo.name
         },
         currentRoute() {
             // help change UI icon to match the route
@@ -58,6 +62,18 @@ header {
     grid-template-columns: 15% 70% 15%;
     grid-template-areas: "left center right";
     background: var(--black);
+}
+
+@media screen and (max-width: 800px) {
+    .long-name {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 801px) {
+    .short-name {
+        display: none;
+    }
 }
 
 section {
