@@ -17,13 +17,10 @@ export default {
 </script>
 
 <style>
-body {
-    min-height: 100vh;
-}
-
 #app {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-overflow-scrolling: touch;
+    min-height: 100vh;
 }
 </style>
