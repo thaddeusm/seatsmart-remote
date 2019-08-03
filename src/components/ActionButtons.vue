@@ -17,7 +17,7 @@ export default {
 
 <style scoped>
 aside {
-	position: fixed;
+	position: sticky;
 	bottom: 0;
 	width: 100%;
 	display: grid;
