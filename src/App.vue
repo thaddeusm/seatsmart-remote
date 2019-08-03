@@ -23,4 +23,8 @@ export default {
     -webkit-overflow-scrolling: touch;
     min-height: 100vh;
 }
+
+main {
+    min-height: 100vh;
+}
 </style>
