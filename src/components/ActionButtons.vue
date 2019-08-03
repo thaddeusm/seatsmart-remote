@@ -18,6 +18,7 @@ export default {
 <style scoped>
 aside {
 	position: fixed;
+	transform: translate3d(0,0,0);
 	bottom: 0;
 	width: 100%;
 	display: grid;
