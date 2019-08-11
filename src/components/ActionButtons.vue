@@ -3,6 +3,11 @@
 		<section class="button-area left">
 			<slot name="left"></slot>
 		</section>
+		<section class="button-area center">
+			<button @click="toggleActivityPanel" v-if="!displayPanel">
+				<img id="activitiesIcon" src="@/assets/activities-circle.svg" alt="activities icon">
+			</button>
+		</section>
 		<section class="button-area right">
 			<slot name="right"></slot>
 		</section>
@@ -11,7 +16,17 @@
 
 <script>
 export default {
-	name: 'ActionButtons'
+	name: 'ActionButtons',
+	computed: {
+		displayPanel() {
+			return this.$store.state.displayActivityPanel
+		}
+	},
+	methods: {
+		toggleActivityPanel() {
+			this.$store.dispatch('toggleActivityPanel')
+		}
+	}
 }
 </script>
 
@@ -22,14 +37,14 @@ aside {
 	bottom: 0;
 	width: 100%;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
 	background: var(--black);
 }
 
 .button-area > button {
 	height: 60px;
 	width: 100%;
-	max-width: 200px;
+	/*max-width: 200px;*/
 	font-size: 26px;
 	outline: none;
 	border: none;
@@ -47,13 +62,15 @@ button > img {
 
 .right {
 	border-left: 2px solid var(--black);
+	text-align: right;
 }
 
-.left > button {
-	
+.center {
+	text-align: center;
+	background: var(--light-gray);
 }
 
-.right > button {
-	float: right;
+#activitiesIcon {
+	height: 40px;
 }
 </style>

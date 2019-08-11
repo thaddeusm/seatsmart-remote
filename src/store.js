@@ -25,7 +25,8 @@ export default new Vuex.Store({
             negative: []
         },
         actionQueue: [],
-        completedActions: []
+        completedActions: [],
+        displayActivityPanel: false
     },
     mutations: {
     	setRoomID(state, roomID) {
@@ -74,6 +75,9 @@ export default new Vuex.Store({
         },
         clearCompletedActions(state) {
             state.completedActions = []
+        },
+        toggleActivityPanel(state) {
+            state.displayActivityPanel = !state.displayActivityPanel
         }
     },
     actions: {
@@ -124,6 +128,9 @@ export default new Vuex.Store({
             })
             context.commit('clearActionQueue')
             context.commit('clearCompletedActions')
+        },
+        toggleActivityPanel(context) {
+            context.commit('toggleActivityPanel')
         }
     }
 })
