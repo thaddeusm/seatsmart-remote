@@ -83,10 +83,19 @@ export default {
 			this.$router.push('/exit')
 		},
 		shortenName(name) {
-			if (name.length > 5) {
-				return name.slice(0, 5) + '...'
+			let formattedName = this.shortName(name)
+
+			if (formattedName.length > 5) {
+				return formattedName.slice(0, 5) + '...'
 			} else {
-				return name
+				return formattedName
+			}
+		},
+		shortName(firstName) {
+			if (firstName.indexOf('(')) {
+				return firstName.split('(')[1].split(')')[0].split(' ')[0]
+			} else {
+				return firstName
 			}
 		}
 	}
