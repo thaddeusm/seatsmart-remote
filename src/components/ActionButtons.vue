@@ -3,11 +3,11 @@
 		<section class="button-area left">
 			<slot name="left"></slot>
 		</section>
-		<section class="button-area center">
+		<!-- <section class="button-area center">
 			<button @click="toggleActivityPanel" v-if="!displayPanel">
 				<img id="activitiesIcon" src="@/assets/activities-circle.svg" alt="activities icon">
 			</button>
-		</section>
+		</section> -->
 		<section class="button-area right">
 			<slot name="right"></slot>
 		</section>

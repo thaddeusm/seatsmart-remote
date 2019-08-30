@@ -170,7 +170,7 @@ export default {
 		},
 		shortName(firstName) {
 			if (firstName.indexOf('(')) {
-				return firstName.split('(')[1].split(')')[0]
+				return firstName.split('(')[1].split(')')[0].split(' ')[0]
 			} else {
 				return firstName
 			}
