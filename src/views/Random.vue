@@ -1,7 +1,7 @@
 <template>
 	<main>
 		<h1>
-			{{ student.firstName }}
+			{{ shortName(student.firstName) }}
 		</h1>
 		<button id="closeButton" @click="directToHome">
 			<img src="@/assets/closered.svg" alt="close icon">
@@ -48,6 +48,13 @@ export default {
 		},
 		absentStudents() {
 			return this.$store.state.absentStudents
+		},
+		shortName(firstName) {
+			if (firstName.indexOf('(')) {
+				return firstName.split('(')[1].split(')')[0].split(' ')[0]
+			} else {
+				return firstName
+			}
 		}
 	},
 	methods: {
