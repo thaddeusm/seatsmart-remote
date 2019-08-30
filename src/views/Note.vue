@@ -170,7 +170,7 @@ export default {
 		findStudentName(id) {
 			for (let i=0; i<this.allStudents.length; i++) {
 				if (this.allStudents[i]._id == id) {
-					return this.allStudents[i].firstName
+					return this.shortName(this.allStudents[i].firstName)
 					break
 				}
 			}
@@ -215,6 +215,13 @@ export default {
 				}
 				this.$store.dispatch('pushToActionQueue', actionObj)
 				this.$router.push(`/?room=${this.room}`)
+			}
+		},
+		shortName(firstName) {
+			if (firstName.indexOf('(')) {
+				return firstName.split('(')[1].split(')')[0].split(' ')[0]
+			} else {
+				return firstName
 			}
 		}
 	},
