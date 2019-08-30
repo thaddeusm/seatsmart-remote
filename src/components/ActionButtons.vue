@@ -37,9 +37,19 @@ aside {
 	bottom: 0;
 	width: 100%;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
 	background: var(--black);
 }
+
+/*aside {
+	position: fixed;
+	transform: translate3d(0,0,0);
+	bottom: 0;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	background: var(--black);
+}*/
 
 .button-area > button {
 	height: 60px;
