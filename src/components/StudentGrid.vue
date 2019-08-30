@@ -9,7 +9,7 @@
                 	@click="chooseStudent(student, index, subIndex)"
                 	:key="student._id + ' ' + numChosen"
                 >
-                		{{ student.firstName }} {{ student.lastName[0]}}.
+                		{{ shortName(student.firstName) }} {{ student.lastName[0]}}.
                 </button>
                 <button class="blank-card" :style="cardStyle" v-else disabled></button>
             </div>
@@ -166,6 +166,13 @@ export default {
 				this.grid[row][column]['chosen'] = false
 			} else {
 				this.grid[row][column]['chosen'] = true
+			}
+		},
+		shortName(firstName) {
+			if (firstName.indexOf('(')) {
+				return firstName.split('(')[1].split(')')[0]
+			} else {
+				return firstName
 			}
 		}
 	},

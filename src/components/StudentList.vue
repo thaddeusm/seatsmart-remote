@@ -11,7 +11,7 @@
 					:class="[student.absent ? 'absent' : '', 'student-button']" 
 					@click="chooseStudent(student)"
 				>
-					{{ student.firstName }} {{ student.lastName }}
+					{{ shortName(student.firstName) }} {{ student.lastName }}
 				</button>
 			</li>
 		</ul>
@@ -98,6 +98,13 @@ export default {
 		clearSearchBox() {
 			this.term = ''
 			this.$refs.listContainer.focus()
+		},
+		shortName(firstName) {
+			if (firstName.indexOf('(')) {
+				return firstName.split('(')[1].split(')')[0]
+			} else {
+				return firstName
+			}
 		}
 	},
 	mounted() {
