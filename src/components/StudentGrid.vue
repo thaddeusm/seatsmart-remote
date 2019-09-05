@@ -4,10 +4,10 @@
             <div v-for="(student, subIndex) in row" :class="[student.chosen ? 'chosen' : '' ,'card-wrapper']" :key="subIndex">
                 <button 
                 	v-if="student._id !== 'blank'" 
-                	:style="cardStyle"
                 	:class="[student.absent ? 'absent' : '']" 
                 	@click="chooseStudent(student, index, subIndex)"
                 	:key="student._id + ' ' + numChosen"
+                	:style="[cardStyle, student.highlight !== '' ? {boxShadow: `inset 0 0 20px 7px ${student.highlight}`} : {boxShadow: `inset 0 0 20px 7px #E5E5E5`}]"
                 >
                 		{{ shortName(student.firstName) }} {{ student.lastName[0]}}.
                 </button>
@@ -31,7 +31,8 @@ export default {
 				height: '',
 				marginLeft: '',
 				marginRight: '',
-				fontSize: ''
+				fontSize: '',
+				boxShadow: ''
 			},
 			rowMargins: {
 				marginTop: '',

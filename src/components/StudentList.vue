@@ -10,6 +10,7 @@
 				<button 
 					:class="[student.absent ? 'absent' : '', 'student-button']" 
 					@click="chooseStudent(student)"
+					:style="student.highlight !== '' ? {boxShadow: `inset 0 0 20px 7px ${student.highlight}`} : {boxShadow: `inset 0 0 20px 7px #E5E5E5`}"
 				>
 					{{ shortName(student.firstName) }} {{ student.lastName }}
 				</button>
