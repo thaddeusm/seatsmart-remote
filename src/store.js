@@ -26,6 +26,8 @@ export default new Vuex.Store({
         },
         actionQueue: [],
         completedActions: [],
+        activities: [],
+        activityInProgress: null,
         displayActivityPanel: false
     },
     mutations: {
@@ -50,6 +52,12 @@ export default new Vuex.Store({
         setBehaviors(state, behaviors) {
             state.behaviors = behaviors
         },
+        setActivities(state, activities) {
+            state.activities = activities
+        },
+        setActivityInProgress(state, activity) {
+            state.activityInProgress = activity
+        },
         pushToActionQueue(state, action) {
             let newId = simpleId()
 
@@ -63,6 +71,10 @@ export default new Vuex.Store({
 
             for (let i=0; i<state.actionQueue.length; i++) {
                 if (state.actionQueue[i].id == actionId) {
+                    if (state.actionQueue[i].action.name == 'launch activity') {
+                        state.activityInProgress = state.actionQueue[i].action.data.activity
+                    }
+
                     action = state.actionQueue.splice(i, 1)
                     break
                 }
@@ -101,6 +113,12 @@ export default new Vuex.Store({
         },
         setBehaviors(context, behaviors) {
             context.commit('setBehaviors', behaviors)
+        },
+        setActivities(context, activities) {
+            context.commit('setActivities', activities)
+        },
+        setActivityInProgress(context, activity) {
+            context.commit('setActivityInProgress', activity)
         },
         pushToActionQueue(context, action) {
             context.commit('pushToActionQueue', action)

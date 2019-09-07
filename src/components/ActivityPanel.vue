@@ -4,6 +4,8 @@
 			<h2>
 				<img id="activitiesIcon" src="@/assets/activities-outline.svg" alt="activities icon">
 			</h2>
+			<ActivitySelector v-if="activityInProgress == null" />
+			<ActivityProgressViewer v-else />
 		</div>
 		<div id="closeArea">
 			<button @click="toggleActivityPanel">
@@ -14,8 +16,25 @@
 </template>
 
 <script>
+import ActivitySelector from '@/components/ActivitySelector.vue'
+import ActivityProgressViewer from '@/components/ActivityProgressViewer.vue'
+
 export default {
 	name: 'ActivityPanel',
+	components: {
+		ActivitySelector,
+		ActivityProgressViewer
+	},
+	data() {
+		return {
+
+		}
+	},
+	computed: {
+		activityInProgress() {
+			return this.$store.state.activityInProgress
+		}
+	},
 	methods: {
 		toggleActivityPanel() {
 			this.$store.dispatch('toggleActivityPanel')
@@ -42,8 +61,8 @@ aside {
 	position: fixed;
 	bottom: 0;
 	left: 0;
-	height: 89vh;
-	grid-template-rows: 1fr 60px;
+	height: 88vh;
+	grid-template-rows: 1fr 90px;
 	width: 100vw;
 	z-index: 1500;
 	background: var(--light-gray);

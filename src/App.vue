@@ -46,7 +46,7 @@ export default {
 }
 
 @keyframes slideUp {
-    from {transform: translateY(89vh);}
+    from {transform: translateY(88vh);}
     to {transform: translateY(0px);}
 }
 </style>

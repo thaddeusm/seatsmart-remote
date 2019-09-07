@@ -31,6 +31,9 @@ export default {
         },
         actionQueue() {
             return this.$store.state.actionQueue
+        },
+        displayActivityPanel() {
+            return this.$store.state.displayActivityPanel
         }
     },
     watch: {
@@ -61,6 +64,8 @@ export default {
             this.$store.dispatch('setAbsentStudents', parsedData.absentStudents)
             this.$store.dispatch('setRandomStudent', parsedData.randomStudent)
             this.$store.dispatch('setBehaviors', parsedData.behaviors)
+            this.$store.dispatch('setActivities', parsedData.activities)
+            this.$store.dispatch('setActivityInProgress', parsedData.activityInProgress)
         },
         rejoinedRoom() {
             // notify client that host has reconnected
@@ -82,6 +87,7 @@ export default {
         },
         sessionEnded() {
             // kick out client when host leaves / cancels connection
+            this.closeActivityPanel()
             this.$router.push('/exit')
         },
         roomJoinRejected() {
@@ -110,6 +116,11 @@ export default {
             document.body.style.position = 'static'
 
             document.body.removeEventListener('click', this.checkClickTarget)
+        },
+        closeActivityPanel() {
+            if (this.displayActivityPanel == true) {
+                this.$store.dispatch('toggleActivityPanel')
+            }
         },
         checkClickTarget(event) {
             console.log(event.target)

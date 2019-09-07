@@ -55,6 +55,9 @@ export default {
 					case 'save note':
 						return `save a note about ${this.shortenName(action.action.data.studentName)}`
 						break
+					case 'launch activity':
+						return `launched ${action.action.data.activity.activityType}`
+						break
 				}
 			})
 		},
@@ -72,6 +75,9 @@ export default {
 						break
 					case 'save note':
 						return `saved a note about ${this.shortenName(action.action.data.studentName)}`
+						break
+					case 'launch activity':
+						return `launched ${action.action.data.activity.activityType}`
 						break
 				}
 			})
