@@ -25,24 +25,25 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (max-width: 800px) {
+/*@media screen and (max-width: 800px) {
 	aside {
-		height: 75vh;
-		grid-template-rows: 85% 1fr;
+		height: 89vh;
+		grid-template-rows: 1fr 60px;
 	}
 }
 
 @media screen and (min-width: 801px) {
 	aside {
-		height: 89vh;
-		grid-template-rows: 90% 1fr;
+		
 	}
-}
+}*/
 
 aside {
 	position: fixed;
 	bottom: 0;
 	left: 0;
+	height: 89vh;
+	grid-template-rows: 1fr 60px;
 	width: 100vw;
 	z-index: 1500;
 	background: var(--light-gray);

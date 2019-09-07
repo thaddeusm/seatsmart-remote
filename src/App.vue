@@ -36,17 +36,17 @@ export default {
 
 .slide-enter-active {
     animation-name: slideUp;
-    animation-duration: .5s;
+    animation-duration: 1s;
 }
 
 .slide-leave-active {
     animation-name: slideUp;
-    animation-duration: .2s;
+    animation-duration: .5s;
     animation-direction: reverse;
 }
 
 @keyframes slideUp {
-    from {transform: translateY(250px);}
+    from {transform: translateY(89vh);}
     to {transform: translateY(0px);}
 }
 </style>

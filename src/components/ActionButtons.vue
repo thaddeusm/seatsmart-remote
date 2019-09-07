@@ -3,11 +3,11 @@
 		<section class="button-area left">
 			<slot name="left"></slot>
 		</section>
-		<!-- <section class="button-area center">
+		<section class="button-area center">
 			<button @click="toggleActivityPanel" v-if="!displayPanel">
 				<img id="activitiesIcon" src="@/assets/activities-circle.svg" alt="activities icon">
 			</button>
-		</section> -->
+		</section>
 		<section class="button-area right">
 			<slot name="right"></slot>
 		</section>
@@ -31,6 +31,11 @@ export default {
 </script>
 
 <style scoped>
+
+
+/*
+without activity panel:
+
 aside {
 	position: fixed;
 	transform: translate3d(0,0,0);
@@ -40,8 +45,9 @@ aside {
 	grid-template-columns: 1fr 1fr;
 	background: var(--black);
 }
+*/
 
-/*aside {
+aside {
 	position: fixed;
 	transform: translate3d(0,0,0);
 	bottom: 0;
@@ -49,7 +55,7 @@ aside {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	background: var(--black);
-}*/
+}
 
 .button-area > button {
 	height: 60px;
