@@ -4,7 +4,7 @@
 			<slot name="left"></slot>
 		</section>
 		<section class="button-area center">
-			<button @click="toggleActivityPanel" v-if="!displayPanel">
+			<button @click="toggleActivityPanel" v-if="!displayPanel" :disabled="!activities">
 				<img id="activitiesIcon" src="@/assets/activities-circle.svg" alt="activities icon">
 			</button>
 		</section>
@@ -20,6 +20,9 @@ export default {
 	computed: {
 		displayPanel() {
 			return this.$store.state.displayActivityPanel
+		},
+		activities() {
+			return this.$store.state.activities
 		}
 	},
 	methods: {
@@ -70,6 +73,10 @@ aside {
 button > img {
 	height: 30px;
 	vertical-align: middle;
+}
+
+button:disabled {
+	display: none;
 }
 
 .left {
