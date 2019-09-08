@@ -97,6 +97,9 @@ export default {
         confirmAction(id) {
             // when host application completes action, remove action from queue
             this.$store.dispatch('removeFromActionQueue', this.decrypt(id))
+        },
+        endRemoteActivity() {
+            this.$store.dispatch('setActivityInProgress', null)
         }
     },
     methods: {

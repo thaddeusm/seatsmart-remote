@@ -1,6 +1,14 @@
 <template>
-	<section v-if="activity !== null">
+	<section>
 		<h4>{{ activity.name }}</h4>
+		<section v-if="activity.status == 'launched'">
+			<h6>Connected Students:</h6>
+			<ul>
+				<li v-for="(student, index) in activity.connectedUsers" :key="`connectedStudent${index}`">
+					{{ student }}
+				</li>
+			</ul>
+		</section>
 	</section>
 </template>
 
