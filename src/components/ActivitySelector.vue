@@ -1,18 +1,12 @@
 <template>
 	<section>
-		<div v-if="activities !== []">
-			<h4>Select an Activity to Launch</h4>
-			<button v-if="!loading" v-for="(activity, index) in activities" @click="launchActivity(index)">
-				<img v-if="activity.activityType == 'survey'" src="@/assets/survey-illustration.svg" alt="survey-illustration">
-				<img v-else src="@/assets/response-pool-illustration.svg" alt="survey-illustration">
-				<h6>{{ shortName(activity.name) }}</h6>
-			</button>
-			<Loader v-if="loading" class="loader" />
-		</div>
-		<div v-else>
-			<h4>You have no saved activities to launch.</h4>
-			<h5>Create a new activity on your computer.</h5>
-		</div>
+		<h4>Select an Activity to Launch</h4>
+		<button v-if="!loading" v-for="(activity, index) in activities" @click="launchActivity(index)">
+			<img v-if="activity.activityType == 'survey'" src="@/assets/survey-illustration.svg" alt="survey-illustration">
+			<img v-else src="@/assets/response-pool-illustration.svg" alt="survey-illustration">
+			<h6>{{ shortName(activity.name) }}</h6>
+		</button>
+		<Loader v-if="loading" class="loader" />
 	</section>
 </template>
 
@@ -72,10 +66,6 @@ button {
 
 img {
 	width: 100%;
-}
-
-h5 {
-	margin-top: 4em;
 }
 
 h6 {
