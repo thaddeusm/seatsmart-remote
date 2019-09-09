@@ -52,10 +52,20 @@ export default {
 </script>
 
 <style scoped>
-section {
-	text-align: center;
-	max-height: 50vh;
-	overflow: auto;
+@media screen and (max-width: 800px) {
+	section {
+		text-align: center;
+		max-height: 45vh;
+		overflow: auto;
+	}
+}
+
+@media screen and (min-width: 801px) {
+	section {
+		text-align: center;
+		max-height: 55vh;
+		overflow: auto;
+	}
 }
 
 button {

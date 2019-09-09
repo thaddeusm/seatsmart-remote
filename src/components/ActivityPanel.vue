@@ -44,19 +44,38 @@ export default {
 </script>
 
 <style scoped>
-aside {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	height: 80vh;
-	grid-template-rows: 1fr 90px;
-	width: 100vw;
-	z-index: 1500;
-	background: var(--light-gray);
-	display: grid;
-	grid-template-areas: 
-		"activity"
-		"close";
+@media screen and (max-width: 800px) {
+	aside {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		height: 75vh;
+		grid-template-rows: 1fr 90px;
+		width: 100vw;
+		z-index: 1500;
+		background: var(--light-gray);
+		display: grid;
+		grid-template-areas: 
+			"activity"
+			"close";
+	}
+}
+
+@media screen and (min-width: 801px) {
+	aside {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		height: 85vh;
+		grid-template-rows: 1fr 90px;
+		width: 100vw;
+		z-index: 1500;
+		background: var(--light-gray);
+		display: grid;
+		grid-template-areas: 
+			"activity"
+			"close";
+	}
 }
 
 #activityArea {
