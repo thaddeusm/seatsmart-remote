@@ -15,7 +15,7 @@
 				Responses: {{ activity.responses.length }}
 			</h5>
 			<section class="actions">
-				<button class="cancel" @click="cancelActivity">cancel</button>
+				<button class="cancel" @click="cancelActivity">end</button>
 			</section>
 		</section>
 	</section>
