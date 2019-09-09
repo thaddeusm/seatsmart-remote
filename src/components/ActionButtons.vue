@@ -4,7 +4,7 @@
 			<slot name="left"></slot>
 		</section>
 		<section class="button-area center">
-			<button @click="toggleActivityPanel" v-if="!displayPanel" :disabled="!activities">
+			<button @click="toggleActivityPanel" v-if="!displayPanel" class="activity-button" :disabled="!activities">
 				<img id="activitiesIcon" src="@/assets/activities-circle.svg" alt="activities icon">
 			</button>
 		</section>
@@ -37,22 +37,6 @@ export default {
 </script>
 
 <style scoped>
-
-
-/*
-without activity panel:
-
-aside {
-	position: fixed;
-	transform: translate3d(0,0,0);
-	bottom: 0;
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	background: var(--black);
-}
-*/
-
 aside {
 	position: fixed;
 	transform: translate3d(0,0,0);
@@ -66,7 +50,6 @@ aside {
 .button-area > button {
 	height: 60px;
 	width: 100%;
-	/*max-width: 200px;*/
 	font-size: 26px;
 	outline: none;
 	border: none;
@@ -78,7 +61,7 @@ button > img {
 	vertical-align: middle;
 }
 
-button:disabled {
+.activity-button:disabled {
 	display: none;
 }
 

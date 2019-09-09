@@ -10,6 +10,14 @@
 				<button class="action" @click="startActivity" :disabled="activity.connectedUsers == undefined || activity.connectedUsers.length == 0">start {{ activity.activityType }}</button>
 			</section>
 		</section>
+		<section v-else>
+			<h5>
+				Responses: {{ activity.responses.length }}
+			</h5>
+			<section class="actions">
+				<button class="cancel" @click="cancelActivity">cancel</button>
+			</section>
+		</section>
 	</section>
 </template>
 
