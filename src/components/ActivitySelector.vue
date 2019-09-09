@@ -45,6 +45,7 @@ export default {
 			}
 			this.loading = true
 			this.$store.dispatch('pushToActionQueue', actionObj)
+			this.$router.push('/activity')
 		}
 	}
 }
@@ -53,6 +54,8 @@ export default {
 <style scoped>
 section {
 	text-align: center;
+	max-height: 65vh;
+	overflow: auto;
 }
 
 button {

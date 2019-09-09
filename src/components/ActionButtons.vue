@@ -23,6 +23,9 @@ export default {
 		},
 		activities() {
 			return this.$store.state.activities
+		},
+		activityInProgress() {
+			return this.$store.state.activityInProgress
 		}
 	},
 	methods: {

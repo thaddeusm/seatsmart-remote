@@ -13,7 +13,7 @@
 			:randomStudent="randomStudent"
 			v-on:student-chosen="routeToNote"
 		/>
-		<ActionButtons>
+		<ActionButtons v-if="loaded">
 			<template slot="left">
 				<button class="action-button" @click="$router.push('/note/none')" :disabled="absentStudents.length == students.length || students.length - absentStudents.length < 2">
 					<img src="@/assets/note.svg" alt="note icon">
@@ -57,6 +57,16 @@ export default {
 		},
 		absentStudents() {
 			return this.$store.state.absentStudents
+		},
+		activityInProgress() {
+			return this.$store.state.activityInProgress
+		}
+	},
+	watch: {
+		activityInProgress(newValue, oldValue) {
+			if (newValue !== null) {
+				this.$router.push('/activity')
+			}
 		}
 	},
 	methods: {

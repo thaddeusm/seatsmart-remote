@@ -21,7 +21,8 @@
 export default {
 	name: 'StudentGrid',
 	props: {
-		chosenStudents: Array
+		chosenStudents: Array,
+		activity: Boolean
 	},
 	data() {
 		return {
@@ -72,6 +73,11 @@ export default {
 
 				// stop loader
 				this.$emit('grid-loaded')
+			}
+		},
+		chosenStudents(newValue, oldValue) {
+			if (this.activity) {
+				this.highlightConnectedStudents()
 			}
 		}
 	},
@@ -158,8 +164,10 @@ export default {
 			this.rowMargins.marginBottom = `${verticalMargin}px`
 		},
 		chooseStudent(student, row, column) {
-			this.numChosen++
-			this.toggleHighlight(student, row, column)
+			if (!this.activity) {
+				this.numChosen++
+				this.toggleHighlight(student, row, column)
+			}
 			this.$emit('student-chosen', student)
 		},
 		toggleHighlight(student, row, column) {
@@ -175,6 +183,14 @@ export default {
 			} else {
 				return firstName
 			}
+		},
+		highlightConnectedStudents() {
+			for (let i=0; i<this.chosenStudents.length; i++) {
+				let row = this.chosenStudents[i].seat.row
+				let column = this.chosenStudents[i].seat.column
+
+				this.grid[row - 1][column - 1]['chosen'] = true
+			}
 		}
 	},
 	mounted() {
@@ -185,6 +201,10 @@ export default {
 
 		this.calculateCardSize()
 		this.buildGrid()
+
+		if (this.activity) {
+			this.highlightConnectedStudents()
+		}
 
 		// try to correct distorted sizing due to mobile keyboard trays
 		let scope = this

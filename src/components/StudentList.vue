@@ -30,7 +30,8 @@ export default {
 		}
 	},
 	props: {
-		chosenStudents: Array
+		chosenStudents: Array,
+		activity: Boolean
 	},
 	computed: {
 		allStudents() {
@@ -76,14 +77,21 @@ export default {
 				this.$emit('list-loaded')
 				this.loaded = true
 			}
+		},
+		chosenStudents(newValue, oldValue) {
+			if (this.activity) {
+				this.highlightConnectedStudents()
+			}
 		}
 	},
 	methods: {
 		chooseStudent(student) {
-			// react to student selection
+			if (!this.activity) {
+				// react to student selection
+				this.numChosen++
+				this.toggleHighlight(student)
+			}
 			this.$emit('student-chosen', student)
-			this.numChosen++
-			this.toggleHighlight(student)
 		},
 		toggleHighlight(student) {
 			for (let i=0; i<this.students.length; i++) {
@@ -106,6 +114,20 @@ export default {
 			} else {
 				return firstName
 			}
+		},
+		highlightConnectedStudents() {
+			for (let i=0; i<this.chosenStudents.length; i++) {
+				let student = this.chosenStudents[i]
+
+				for (let j=0; j<this.students.length; j++) {
+					if (student._id == this.students[j]._id) {
+						this.students[j]['chosen'] = true
+						break
+					}
+				}
+			}
+
+
 		}
 	},
 	mounted() {

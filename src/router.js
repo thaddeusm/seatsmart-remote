@@ -6,6 +6,7 @@ import Random from './views/Random.vue'
 import Code from './views/Code.vue'
 import Exit from './views/Exit.vue'
 import NotFound from './views/NotFound.vue'
+import Activity from './views/Activity.vue'
 
 Vue.use(Router)
 
@@ -31,6 +32,11 @@ export default new Router({
       path: '/random',
       name: 'random',
       component: Random
+    },
+    {
+      path: '/activity',
+      name: 'activity',
+      component: Activity
     },
     {
       path: '/code',
