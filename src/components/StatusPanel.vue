@@ -79,6 +79,12 @@ export default {
 					case 'launch activity':
 						return `launched ${action.action.data.activity.activityType}`
 						break
+					case 'cancel activity':
+						return `canceled ${action.action.data.activity.activityType}`
+						break
+					case 'start activity':
+						return `started ${action.action.data.activity.activityType}`
+						break
 				}
 			})
 		}
