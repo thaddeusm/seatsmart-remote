@@ -48,7 +48,7 @@ aside {
 	position: fixed;
 	bottom: 0;
 	left: 0;
-	height: 85vh;
+	height: 82vh;
 	grid-template-rows: 1fr 90px;
 	width: 100vw;
 	z-index: 1500;

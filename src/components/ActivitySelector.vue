@@ -54,7 +54,7 @@ export default {
 <style scoped>
 section {
 	text-align: center;
-	max-height: 65vh;
+	max-height: 55vh;
 	overflow: auto;
 }
 
