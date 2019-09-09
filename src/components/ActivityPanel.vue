@@ -44,24 +44,11 @@ export default {
 </script>
 
 <style scoped>
-/*@media screen and (max-width: 800px) {
-	aside {
-		height: 89vh;
-		grid-template-rows: 1fr 60px;
-	}
-}
-
-@media screen and (min-width: 801px) {
-	aside {
-		
-	}
-}*/
-
 aside {
 	position: fixed;
 	bottom: 0;
 	left: 0;
-	height: 88vh;
+	height: 85vh;
 	grid-template-rows: 1fr 90px;
 	width: 100vw;
 	z-index: 1500;
