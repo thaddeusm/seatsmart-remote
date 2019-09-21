@@ -33,10 +33,6 @@ export default {
     -webkit-overflow-scrolling: touch;
 }
 
-main {
-    height: 100%;
-}
-
 .slide-enter-active {
     animation-name: slideUp;
     animation-duration: 1s;
