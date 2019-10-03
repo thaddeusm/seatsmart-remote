@@ -31,13 +31,12 @@ export default {
 
 <style scoped>
 main {
-	width: 100vw;
-	height: 100vh;
+	height: 100%;
 	display: grid;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	grid-template-rows: 1fr 1fr;
+	grid-template-rows: 50% 50%;
 	grid-template-areas: 
 		"image"
 		"message";

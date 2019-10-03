@@ -57,9 +57,7 @@ export default {
 
 <style scoped>
 header {
-    width: 100%;
-    height: 100%;
-    min-height: 10vh;
+    min-height: 10%;
     display: grid;
     grid-template-columns: 15% 70% 15%;
     grid-template-areas: "left center right";
