@@ -11,7 +11,7 @@
 			</section>
 		</section>
 		<section v-else>
-			<h5>
+			<h5 v-if="activity.responses">
 				Responses: {{ activity.responses.length }}
 			</h5>
 			<section class="actions">

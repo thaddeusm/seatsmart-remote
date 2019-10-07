@@ -84,7 +84,22 @@ export default {
 	},
 	methods: {
 		openStudentInfo(student) {
+			let studentResponses = []
 
+			console.log(this.activityInProgress)
+			console.log(student)
+
+			if (this.activityInProgress.responses.length > 0) {
+				for (let i=0; i<this.activityInProgress.responses.length; i++) {
+					let response = this.activityInProgress.responses[i]
+
+					if (response.student.id == student._id) {
+						studentResponses.push(response.response)
+					}
+				}
+			}
+
+			console.log(studentResponses)
 		}
 	}
 }
