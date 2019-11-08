@@ -9,23 +9,7 @@
 
 <script>
 export default {
-	name: 'Exit',
-	methods: {
-		resetStore() {
-			this.$store.dispatch('resetStore')
-		},
-		routeToCodeView() {
-			let scope = this
-
-			setTimeout(function() {
-				scope.$router.push('/code')
-			}, 3000, scope)
-		}
-	},
-	mounted() {
-		this.resetStore()
-		this.routeToCodeView()
-	}
+	name: 'Exit'
 }
 </script>
 
