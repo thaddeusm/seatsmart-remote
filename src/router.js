@@ -44,6 +44,12 @@ export default new Router({
       component: Code
     },
     {
+      path: '/code/:num',
+      name: 'codeInput',
+      props: true,
+      component: Code
+    },
+    {
       path: '/exit',
       name: 'exit',
       component: Exit
