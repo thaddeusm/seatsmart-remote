@@ -72,7 +72,7 @@ export default {
             this.connected = true
 
             // request fresh data on rejoin
-            this.$socket.emit('requestData')
+            // this.$socket.emit('requestData')
         },
         disconnect() {
             // update UI on disconnection
