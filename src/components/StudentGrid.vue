@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<div class="row" v-for="(row, index) in grid" :style="rowMargins">
-            <div v-for="(student, subIndex) in row" :class="[student.chosen ? 'chosen' : '' ,'card-wrapper']" :key="subIndex">
+            <div v-for="(student, subIndex) in row" :class="[chosenStudents.includes(student._id) ? 'chosen' : '' ,'card-wrapper']" :key="subIndex">
                 <button 
                 	v-if="student._id !== 'blank'" 
                 	:class="[student.absent ? 'absent' : '']" 

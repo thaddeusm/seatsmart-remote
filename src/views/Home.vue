@@ -6,21 +6,23 @@
 			id="studentList" 
 			:randomStudent="randomStudent"
 			v-on:student-chosen="routeToNote"
+			:chosenStudents="[]"
 		/>
 		<StudentGrid 
 			v-on:grid-loaded="loaded = true" 
 			id="studentGrid" 
 			:randomStudent="randomStudent"
 			v-on:student-chosen="routeToNote"
+			:chosenStudents="[]"
 		/>
 		<ActionButtons v-if="loaded">
 			<template slot="left">
-				<button class="action-button" @click="$router.push('/note/none')" :disabled="absentStudents.length == students.length || students.length - absentStudents.length < 2">
+				<button class="action-button" @click="$router.push('/note/none')" :disabled="absentStudents.length == students.length">
 					<img src="@/assets/note.svg" alt="note icon">
 				</button>
 			</template>
 			<template slot="right">
-				<button class="action-button" @click="$router.push('/random')" :disabled="absentStudents.length == students.length || students.length - absentStudents.length < 2">
+				<button class="action-button" @click="$router.push('/random')" :disabled="absentStudents.length == students.length">
 					<img src="@/assets/random.svg" alt="dice icon">
 				</button>
 			</template>

@@ -8,13 +8,13 @@
 				id="studentList" 
 				v-on:student-chosen="toggleAddStudent"
 				v-if="student == 'none'"
-				:chosenStudents="students"
+				:chosenStudents="studentIds"
 			/>
 			<StudentGrid 
 				id="studentGrid" 
 				v-on:student-chosen="toggleAddStudent"
 				v-if="student == 'none'"
-				:chosenStudents="students"
+				:chosenStudents="studentIds"
 			/>
 			<ActionButtons>
 				<template slot="left">
@@ -87,6 +87,7 @@ export default {
 	data() {
 		return {
 			students: [],
+			studentIds: [],
 			state: '',
 			chosenBehavior: {
 				Abbreviation: '',
@@ -122,8 +123,10 @@ export default {
 
 			if (studentIndex > -1) {
 				this.students.splice(studentIndex, 1)
+				this.studentIds.splice(studentIndex, 1)
 			} else {
 				this.students.push(student)
+				this.studentIds.push(student._id)
 			}
 		},
 		routeBack() {
@@ -191,7 +194,6 @@ export default {
 					}
 
 					this.$store.dispatch('pushToActionQueue', actionObj)
-					this.$router.push(`/?room=${this.room}`)
 				}
 			// or save note for one student
 			} else {
@@ -214,8 +216,8 @@ export default {
 					}
 				}
 				this.$store.dispatch('pushToActionQueue', actionObj)
-				this.$router.push(`/?room=${this.room}`)
 			}
+			this.$router.push(`/?room=${this.room}`)
 		},
 		shortName(firstName) {
 			if (firstName.indexOf('(') !== -1) {

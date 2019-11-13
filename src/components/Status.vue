@@ -72,7 +72,7 @@ export default {
             this.connected = true
 
             // request fresh data on rejoin
-            // this.$socket.emit('requestData')
+            this.$socket.emit('requestData')
         },
         disconnect() {
             // update UI on disconnection
@@ -126,7 +126,6 @@ export default {
             }
         },
         checkClickTarget(event) {
-            console.log(event.target)
             if (event.target.tagName !== "IMG" && event.target.parentNode.id !== "panelContainer" && event.target.id !== "panelContainer") {
                 this.closeStatusPanel()
             }
