@@ -6,7 +6,7 @@
 			<button v-else @click="clearSearchBox" id="clearSearchBoxButton"><img src="@/assets/closered.svg" alt="close icon"></button>
 		</div>
 		<ul>
-			<li v-for="(student, index) in students" :class="[student.chosen ? 'chosen' : '']" :key="`student${index}${numChosen}`">
+			<li v-for="(student, index) in students" :class="[chosenStudents.includes(student._id) ? 'chosen' : '']" :key="`student${index}${numChosen}`">
 				<button 
 					:class="[student.absent ? 'absent' : '', 'student-button']" 
 					@click="chooseStudent(student)"
