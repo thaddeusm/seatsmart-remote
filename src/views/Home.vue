@@ -4,14 +4,12 @@
 		<StudentList 
 			v-on:list-loaded="loaded = true" 
 			id="studentList" 
-			:randomStudent="randomStudent"
 			v-on:student-chosen="routeToNote"
 			:chosenStudents="[]"
 		/>
 		<StudentGrid 
 			v-on:grid-loaded="loaded = true" 
 			id="studentGrid" 
-			:randomStudent="randomStudent"
 			v-on:student-chosen="routeToNote"
 			:chosenStudents="[]"
 		/>

@@ -1,11 +1,15 @@
 <template>
 	<main>
-		<h1>
-			{{ shortName(student.firstName) }}
-		</h1>
-		<button id="closeButton" @click="directToHome">
-			<img src="@/assets/closered.svg" alt="close icon">
-		</button>
+		<StudentList  
+			id="studentList" 
+			v-on:student-chosen="routeToNote"
+			:chosenStudents="selectedStudent"
+		/>
+		<StudentGrid 
+			id="studentGrid" 
+			v-on:student-chosen="routeToNote"
+			:chosenStudents="selectedStudent"
+		/>
 		<ActionButtons>
 			<template slot="left">
 				<button class="action-button" @click="directToNote">
@@ -23,11 +27,15 @@
 
 <script>
 import ActionButtons from '@/components/ActionButtons.vue'
+import StudentList from '@/components/StudentList.vue'
+import StudentGrid from '@/components/StudentGrid.vue'
 
 export default {
 	name: 'Random',
 	components: {
-		ActionButtons
+		ActionButtons,
+		StudentList,
+		StudentGrid
 	},
 	computed: {
 		randomStudent() {
@@ -48,6 +56,9 @@ export default {
 		},
 		absentStudents() {
 			return this.$store.state.absentStudents
+		},
+		selectedStudent() {
+			return [this.student._id]
 		}
 	},
 	methods: {
@@ -93,6 +104,10 @@ export default {
 			} else {
 				return firstName
 			}
+		},
+		routeToNote(student) {
+			// when a student is selected, pass their id to add note view
+			this.$router.push(`/note/${student._id}`)
 		}
 	},
 	mounted() {
@@ -102,20 +117,16 @@ export default {
 </script>
 
 <style scoped>
-#closeButton {
-	cursor: pointer;
-	outline: none;
-	border: none;
-	display: block;
-	margin: 0 auto;
-	background: none;
+@media screen and (max-width: 800px) {
+	#studentGrid {
+		display: none;
+	}
 }
 
-h1 {
-	color: var(--white);
-	margin: 70px 0;
-	font-size: 3em;
-	text-align: center;
+@media screen and (min-width: 801px) {
+	#studentList {
+		display: none;
+	}
 }
 
 .action-button {
