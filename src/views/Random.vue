@@ -93,9 +93,9 @@ export default {
 			this.$router.push(`/note/${this.student._id}`)
 		},
 		directToHome() {
+			this.$store.dispatch('toggleRandomSelectorRunning')
 			// disable random student UI on host
 			this.disableRandom()
-			this.$store.dispatch('toggleRandomSelectorRunning')
 			this.$router.push(`/?room=${this.room}`)
 		},
 		shortName(firstName) {
