@@ -28,7 +28,8 @@ export default new Vuex.Store({
         completedActions: [],
         activities: [],
         activityInProgress: null,
-        displayActivityPanel: false
+        displayActivityPanel: false,
+        randomSelectorRunning: false
     },
     mutations: {
     	setRoomID(state, roomID) {
@@ -44,7 +45,9 @@ export default new Vuex.Store({
             state.absentStudents = absentStudents
         },
         setRandomStudent(state, randomStudent) {
-            state.randomStudent = randomStudent
+            if (!state.randomSelectorRunning) {
+                state.randomStudent = randomStudent
+            }
         },
         incrementRandomStudent(state) {
             state.randomStudent++
@@ -90,6 +93,9 @@ export default new Vuex.Store({
         },
         toggleActivityPanel(state) {
             state.displayActivityPanel = !state.displayActivityPanel
+        },
+        toggleRandomSelectorRunning(state) {
+            state.randomSelectorRunning = !state.randomSelectorRunning
         }
     },
     actions: {
@@ -149,6 +155,9 @@ export default new Vuex.Store({
         },
         toggleActivityPanel(context) {
             context.commit('toggleActivityPanel')
+        },
+        toggleRandomSelectorRunning(context) {
+            context.commit('toggleRandomSelectorRunning')
         }
     }
 })

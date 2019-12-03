@@ -95,7 +95,7 @@ export default {
 		directToHome() {
 			// disable random student UI on host
 			this.disableRandom()
-
+			this.$store.dispatch('toggleRandomSelectorRunning')
 			this.$router.push(`/?room=${this.room}`)
 		},
 		shortName(firstName) {
@@ -111,6 +111,7 @@ export default {
 		}
 	},
 	mounted() {
+		this.$store.dispatch('toggleRandomSelectorRunning')
 		this.sendRandomToHost()
 	}
 }
