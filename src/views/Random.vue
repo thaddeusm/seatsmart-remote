@@ -12,12 +12,12 @@
 		/>
 		<ActionButtons>
 			<template slot="left">
-				<button class="action-button" @click="directToNote">
-					<img src="@/assets/note.svg" alt="note icon">
-				</button>
+				<button class="action-button" @click="directToHome">
+						<img src="@/assets/closeblack.svg" alt="close icon">
+					</button>
 			</template>
 			<template slot="right">
-				<button class="action-button" @dblclick="directToHome" @click="incrementRandomStudent" :disabled="absentStudents.length == students.length || students.length - absentStudents.length < 2">
+				<button class="action-button" @click="incrementRandomStudent" :disabled="absentStudents.length == students.length || students.length - absentStudents.length < 2">
 					<img src="@/assets/random.svg" alt="dice icon">
 				</button>
 			</template>
