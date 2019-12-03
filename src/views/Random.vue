@@ -17,7 +17,7 @@
 				</button>
 			</template>
 			<template slot="right">
-				<button class="action-button" @click="incrementRandomStudent" :disabled="absentStudents.length == students.length || students.length - absentStudents.length < 2">
+				<button class="action-button" @dblclick="directToHome" @click="incrementRandomStudent" :disabled="absentStudents.length == students.length || students.length - absentStudents.length < 2">
 					<img src="@/assets/random.svg" alt="dice icon">
 				</button>
 			</template>
