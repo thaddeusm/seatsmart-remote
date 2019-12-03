@@ -107,6 +107,7 @@ export default {
 		},
 		routeToNote(student) {
 			this.$store.dispatch('toggleRandomSelectorRunning')
+			this.disableRandom()
 			// when a student is selected, pass their id to add note view
 			this.$router.push(`/note/${student._id}`)
 		}
