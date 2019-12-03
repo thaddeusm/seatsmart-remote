@@ -112,7 +112,7 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch('toggleRandomSelectorRunning')
-		this.sendRandomToHost()
+		this.incrementRandomStudent()
 	}
 }
 </script>
