@@ -30,6 +30,7 @@ export default {
 * {
     margin: 0;
     padding: 0;
+    touch-action: manipulation;
 }
 
 /* inspired by FHSU colors */

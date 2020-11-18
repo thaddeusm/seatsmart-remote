@@ -71,7 +71,7 @@ section {
 	display: grid;
 	grid-template-rows: 1fr 1fr;
 	align-items: center;
-	height: 50vh;
+	height: 40vh;
 }
 
 .actions {
