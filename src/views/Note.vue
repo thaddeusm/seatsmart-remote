@@ -156,7 +156,11 @@ export default {
 			if (this.student !== "none") {
 				this.state = `enter a note about ${this.findStudentName(this.student)}`
 			} else {
-				this.state = `enter a note about ${this.students.length} students`
+				if (this.students.length > 1) {
+					this.state = `enter a note about ${this.students.length} students`
+				} else {
+					this.state = `enter a note about 1 student`
+				}
 			}
 			
 		},
