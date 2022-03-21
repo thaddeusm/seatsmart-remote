@@ -138,6 +138,7 @@ button {
     font-family: "ArchivoNarrow";
     outline: none;
     cursor: pointer;
+    color: var(--black);
 }
 
 a {
