@@ -85,6 +85,7 @@ img {
 
 h6 {
 	margin: .6em 0;
+	color: var(--black);
 }
 
 .loader {

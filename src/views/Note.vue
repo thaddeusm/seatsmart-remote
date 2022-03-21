@@ -4,14 +4,14 @@
 			<h2>{{ state }}</h2>
 		</header>
 		<section v-if="state == 'choose students'">
-			<StudentList 
-				id="studentList" 
+			<StudentList
+				id="studentList"
 				v-on:student-chosen="toggleAddStudent"
 				v-if="student == 'none'"
 				:chosenStudents="studentIds"
 			/>
-			<StudentGrid 
-				id="studentGrid" 
+			<StudentGrid
+				id="studentGrid"
 				v-on:student-chosen="toggleAddStudent"
 				v-if="student == 'none'"
 				:chosenStudents="studentIds"
@@ -162,7 +162,7 @@ export default {
 					this.state = `enter a note about 1 student`
 				}
 			}
-			
+
 		},
 		resetBehavior() {
 			this.chosenBehavior = {
@@ -336,6 +336,7 @@ textarea {
 
 .positive {
 	background: var(--yellow);
+	color: var(--black);
 }
 
 .negative {
