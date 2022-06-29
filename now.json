@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "alias": ["remote.seatsmart.tech"],
+  "alias": ["seatsmart-remote.thaddeus.education"],
   "name": "seatsmart-remote",
   "builds": [{ "src": "package.json", "use": "@now/static-build" }],
   "routes": [
