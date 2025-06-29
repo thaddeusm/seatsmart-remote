@@ -11,7 +11,7 @@ import './registerServiceWorker'
 
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: SocketIO('https://seatsmart-remote-server.glitch.me')
+    connection: SocketIO('https://seatsmart-remote-server.onrender.com')
 }))
 
 new Vue({
